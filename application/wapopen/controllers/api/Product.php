@@ -1,8 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Table extends MY_Controller 
+class Product extends MY_Controller 
 {	
-	private $model = "modeltable";
+	private $model = "modelproduct";
 	function __construct() 
 	{
 		parent::__construct();
@@ -43,7 +43,27 @@ class Table extends MY_Controller
 		{
 			$search['%%title'] = $data['title'];
 		}
-		
+
+		if ( isset($data['category_id']) && is_numeric($data['category_id']) ) 
+		{
+			$search['category_id'] = $data['category_id'];
+		}
+
+		if ( isset($data['label_id']) && is_numeric($data['label_id']) ) 
+		{
+			$search['label_id'] = $data['label_id'];
+		}
+
+		if ( isset($data['is_online']) && is_numeric($data['is_online']) ) 
+		{
+			$search['is_online'] = $data['is_online'];
+		}
+
+		if ( isset($data['!num']) && is_numeric($data['!num']) ) 
+		{
+			$search['!num'] = $data['!num'];
+		}
+
 		$lists_all = $this->$model->lists($search, $page, $num, $order_by,$fields_str);
 		   
 		if(! is_array($lists_all))
@@ -54,8 +74,37 @@ class Table extends MY_Controller
 		   
        	$lists = $lists_all['lists'];
 		$others_data = $lists_all['others_data'];
-		   
+
+		//获取分类
+		$this->load->model('api/modelcategory', 'modelcategory');
+		$category = $this->modelcategory->lists(array('user_id' => $this->_user_id), 1, 1000);
+		$categoryMap = Common::arrChangeKey($category['lists'], 'id');
+
+		//获取标签
+		$this->load->model('api/modellabel', 'modellabel');
+		$label = $this->modellabel->lists(array('user_id' => $this->_user_id), 1, 1000);
+		$labelMap = Common::arrChangeKey($label['lists'], 'id');
+
+		foreach ($lists as $key => $value) 
+		{
+			$lists[$key]['category_title'] = isset($categoryMap[$value['category_id']]) ? $categoryMap[$value['category_id']]['title'] : '';
+
+			$lists[$key]['label_title'] = isset($labelMap[$value['label_id']]) ? $labelMap[$value['label_id']]['title'] : '';
+		}
+
        	KsMessage::showSucc('succ', $lists, $others_data);
+	}
+
+	//前端展示菜品
+	function li()
+	{
+		$data = $this->req_param('GET');
+		$model = $this->model;
+
+		$_GET['is_online'] = 1;
+		$_GET['!num'] = 0;
+
+		$this->lists();
 	}
 	
 	/**
@@ -86,6 +135,7 @@ class Table extends MY_Controller
 
 		KsMessage::showSucc('succ',$one);
 	}
+
 	/**
 	 * 新增
 	 */
@@ -115,13 +165,13 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20010');
 				}
 			}
 		}
-		
-		unset($data[$this->$model->_primary]);
 
+		unset($data[$this->$model->_primary]);
+		
 		$data['user_id'] = $this->_user_id;
 		$data['add_time'] = date('Y-m-d H:i:s');
 
@@ -175,7 +225,7 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20010');
 				}
 			}
 		}

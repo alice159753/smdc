@@ -282,16 +282,49 @@
         <li><a href="#id7" id="a_href7">账号删除</a></li>
         <li><a href="#id8" id="a_href8">账号查询</a></li>
 
-        <li><a href="#id9" id="a_href9">桌号列表</a></li>
+        <!-- <li><a href="#id9"  id="a_href9">桌号列表</a></li>
         <li><a href="#id10" id="a_href10">桌号添加</a></li>
         <li><a href="#id11" id="a_href11">桌号修改</a></li>
         <li><a href="#id12" id="a_href12">桌号删除</a></li>
-        <li><a href="#id13" id="a_href13">桌号查询</a></li>
+        <li><a href="#id13" id="a_href13">桌号查询</a></li> -->
+
+        <li><a href="#id14" id="a_href14">标签列表</a></li>
+        <li><a href="#id15" id="a_href15">标签添加</a></li>
+        <li><a href="#id16" id="a_href16">标签修改</a></li>
+        <li><a href="#id17" id="a_href17">标签删除</a></li>
+        <li><a href="#id18" id="a_href18">标签查询</a></li>
+
+        <li><a href="#id19" id="a_href19">热门搜索列表</a></li>
+        <li><a href="#id20" id="a_href20">热门搜索添加</a></li>
+        <li><a href="#id21" id="a_href21">热门搜索修改</a></li>
+        <li><a href="#id22" id="a_href22">热门搜索删除</a></li>
+        <li><a href="#id23" id="a_href23">热门搜索查询</a></li>
+
+        <li><a href="#id24" id="a_href24">菜品分类列表</a></li>
+        <li><a href="#id25" id="a_href25">菜品分类添加</a></li>
+        <li><a href="#id26" id="a_href26">菜品分类修改</a></li>
+        <li><a href="#id27" id="a_href27">菜品分类删除</a></li>
+        <li><a href="#id28" id="a_href28">菜品分类查询</a></li>
 
 
+        <li><a href="#id29" id="a_href29">菜品管理列表</a></li>
+        <li><a href="#id42" id="a_href42">前端-菜品管理列表</a></li>
+        <li><a href="#id30" id="a_href30">菜品管理添加</a></li>
+        <li><a href="#id31" id="a_href31">菜品管理修改</a></li>
+        <li><a href="#id32" id="a_href32">菜品管理删除</a></li>
+        <li><a href="#id33" id="a_href33">菜品管理查询</a></li>
 
+        <li><a href="#id34" id="a_href34">系统说明添加修改</a></li>
+        <li><a href="#id35" id="a_href35">系统说明查询</a></li>
 
-
+        <li><a href="#id36" id="a_href36">订单创建</a></li>
+        <li><a href="#id37" id="a_href37">订单列表</a></li>
+        <li><a href="#id38" id="a_href38">订单删除</a></li>
+        <li><a href="#id39" id="a_href39">订单详情</a></li>
+        <li><a href="#id40" id="a_href40">订单保存</a></li>
+        <li><a href="#id41" id="a_href41">订单打单</a></li>
+        <li><a href="#id43" id="a_href43">订单统计</a></li>
+        <li><a href="#id44" id="a_href44">订单统计查询按日期</a></li>
 
 
     </ul>
@@ -1026,7 +1059,7 @@ http://git.localhost.com/smdc/api/user/edit?api_key=23166839&account=admin&passw
 			<td>id</td>
 			<td>int</td>
 			<td>是</td>
-			<td>账号ID</td>
+			<td>编号ID</td>
 		</tr>
 
 	</tbody>
@@ -1112,7 +1145,7 @@ http://git.localhost.com/smdc/api/user/edit?api_key=23166839&account=admin&passw
 			<td>id</td>
 			<td>int</td>
 			<td>是</td>
-			<td>账号ID</td>
+			<td>编号ID</td>
 		</tr>
 
 	</tbody>
@@ -1479,7 +1512,7 @@ http://git.localhost.com/smdc/api/user/edit?api_key=23166839&account=admin&passw
 			<td>id</td>
 			<td>int</td>
 			<td>是</td>
-			<td>账号ID</td>
+			<td>编号ID</td>
 		</tr>
 
 	</tbody>
@@ -1563,7 +1596,7 @@ http://git.localhost.com/smdc/api/user/edit?api_key=23166839&account=admin&passw
 			<td>id</td>
 			<td>int</td>
 			<td>是</td>
-			<td>账号ID</td>
+			<td>编号ID</td>
 		</tr>
 
 	</tbody>
@@ -1592,6 +1625,2940 @@ http://git.localhost.com/smdc/api/user/edit?api_key=23166839&account=admin&passw
 }
 </code></pre>
 
+
+
+
+
+
+
+<h4><a name="id14">标签列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>标签列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>标签列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/label/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>否</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "1号", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }]
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id15">标签添加</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>标签添加</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>标签添加</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/label/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=1号桌
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            1  表自增长数字
+        }
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id16">标签修改</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>标签修改</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>标签修改</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/label/edit?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=234
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "1号", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }
+    }
+}
+</code></pre>
+
+
+
+
+
+<h4><a name="id17">标签删除</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>标签删除</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>标签删除</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/label/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2"
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id18">标签查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>标签查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>标签查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/label/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id19">热门搜索列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>热门搜索列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>热门搜索列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/hotsearch/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>否</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "1号", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }]
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id20">热门搜索添加</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>热门搜索添加</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>热门搜索添加</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/hotsearch/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=1号桌
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            1  表自增长数字
+        }
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id21">热门搜索修改</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>热门搜索修改</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>热门搜索修改</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/hotsearch/edit?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=234
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "1号", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }
+    }
+}
+</code></pre>
+
+
+
+
+
+<h4><a name="id22">热门搜索删除</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>热门搜索删除</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>热门搜索删除</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/hotsearch/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2"
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id23">热门搜索查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>热门搜索查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>热门搜索查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/hotsearch/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id24">菜品分类列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品分类列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品分类列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/category/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>否</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "1号", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }]
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id25">菜品分类添加</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品分类添加</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品分类添加</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+http://git.localhost.com/smdc/api/category/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=1号桌
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            1  表自增长数字
+        }
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id26">菜品分类修改</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品分类修改</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品分类修改</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+http://git.localhost.com/smdc/api/category/edit?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=234
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "1号", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }
+    }
+}
+</code></pre>
+
+
+
+
+
+<h4><a name="id27">菜品分类删除</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品分类删除</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品分类删除</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+http://git.localhost.com/smdc/api/category/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2"
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id28">菜品分类查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品分类查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品分类查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+http://git.localhost.com/smdc/api/category/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id29">菜品管理列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品管理列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品管理列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/product/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>否</td>
+			<td>名称</td>
+		</tr>
+
+        <tr>
+            <td>is_online</td>
+            <td>int</td>
+            <td>否</td>
+            <td>是否上架，1已上架，0下架</td>
+        </tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "2",  编号
+            "user_id": "8",  用户ID
+            "title": "测试2",  名称
+            "category_id": "3", 分类ID
+            "label_id": "12",  标签ID
+            "num": "0",   数量
+            "is_online": "1", 是否上架，1已上架，0下架
+            "price": "0.00",  价格
+            "img_url": "",  图片
+            "add_time": null,
+            "update_time": null,
+            "category_title": "牛肉", 分类名称
+            "label_title": "招牌"  标签名称
+        }]
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id30">菜品管理添加</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品管理添加</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品管理添加</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/product/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=1号桌
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+        </tr>
+        
+        <tr>
+            <td>category_id</td>
+            <td>int</td>
+            <td>是</td>
+            <td>分类ID</td>
+        </tr>
+
+        <tr>
+            <td>label_id</td>
+            <td>int</td>
+            <td>是</td>
+            <td>标签ID</td>
+        </tr>
+
+        <tr>
+            <td>num</td>
+            <td>int</td>
+            <td>是</td>
+            <td>数量</td>
+        </tr>
+
+        <tr>
+            <td>price</td>
+            <td>float</td>
+            <td>是</td>
+            <td>价格</td>
+        </tr>
+
+        <tr>
+            <td>img_url</td>
+            <td>string</td>
+            <td>是</td>
+            <td>图片</td>
+        </tr>
+
+        <tr>
+            <td>is_online</td>
+            <td>int</td>
+            <td>是</td>
+            <td>是否上架，1已上架，0下架</td>
+        </tr>
+
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            1  表自增长数字
+        }
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id31">菜品管理修改</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品管理修改</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品管理修改</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/product/edit?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=234
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+                
+        <tr>
+            <td>category_id</td>
+            <td>int</td>
+            <td>是</td>
+            <td>分类ID</td>
+        </tr>
+
+        <tr>
+            <td>label_id</td>
+            <td>int</td>
+            <td>是</td>
+            <td>标签ID</td>
+        </tr>
+
+        <tr>
+            <td>num</td>
+            <td>int</td>
+            <td>是</td>
+            <td>数量</td>
+        </tr>
+
+        <tr>
+            <td>price</td>
+            <td>float</td>
+            <td>是</td>
+            <td>价格</td>
+        </tr>
+
+        <tr>
+            <td>img_url</td>
+            <td>string</td>
+            <td>是</td>
+            <td>图片</td>
+        </tr>
+
+        <tr>
+            <td>is_online</td>
+            <td>int</td>
+            <td>是</td>
+            <td>是否上架，1已上架，0下架</td>
+        </tr>
+
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2", 编号
+            "user_id": "8", 用户ID
+            "title": "测试2", 名称
+            "category_id": "3", 分类ID
+            "label_id": "12", 标签ID
+            "num": "0", 数量
+            "is_online": "1", 是否上架，1已上架，0下架
+            "price": "0.00", 价格
+            "img_url": "", 图片
+            "add_time": null,
+            "update_time": null,
+            "category_title": "牛肉", 分类名称
+            "label_title": "招牌" 标签名称
+        }
+    }
+}
+</code></pre>
+
+
+
+
+
+<h4><a name="id32">菜品管理删除</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品管理删除</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品管理删除</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/product/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2"
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id33">菜品管理查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>菜品管理查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>菜品管理查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/product/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2", 编号
+            "user_id": "8", 用户ID
+            "title": "测试2", 名称
+            "category_id": "3", 分类ID
+            "label_id": "12", 标签ID
+            "num": "0", 数量
+            "is_online": "1", 是否上架，1已上架，0下架
+            "price": "0.00", 价格
+            "img_url": "", 图片
+            "add_time": null,
+            "update_time": null,
+            "category_title": "牛肉", 分类名称
+            "label_title": "招牌" 标签名称
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id34">系统说明添加修改</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>系统说明添加修改</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>系统说明添加修改</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/system/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+            <td>app_use_info</td>
+			<td>string</td>
+			<td>否</td>
+            <td>软件使用说明</td>
+		</tr>
+
+		<tr>
+            <td>contact_us</td>
+			<td>int</td>
+			<td>否</td>
+			<td>联系我们</td>
+		</tr>
+
+		<tr>
+            <td>user_use_info</td>
+			<td>int</td>
+			<td>否</td>
+            <td>用户使用说明</td>
+		</tr>
+
+		<tr>
+            <td>about_us</td>
+			<td>int</td>
+			<td>否</td>
+			<td>关于我们</td>
+		</tr>
+
+        <tr>
+            <td>system_info</td>
+            <td>int</td>
+            <td>否</td>
+            <td>系统说明</td>
+        </tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            1  表自增长数字
+        }
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id35">系统说明查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>系统说明查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>系统说明查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/system/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "1",
+            "app_use_info": "1", 软件使用说明
+            "contact_us": null, 联系我们
+            "user_use_info": null, 用户使用说明
+            "about_us": null 关于我们
+            "system_info": null 系统说明
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id36">订单创建</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>订单创建</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>订单创建</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+http://git.localhost.com/smdc/api/order/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&&product_ids=1,2&nums=1,2&user_num=1&table_id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+            <td>product_ids</td>
+			<td>string</td>
+			<td>是</td>
+			<td>菜品ID，多的以英文字符逗号分隔</td>
+		</tr>
+
+        <tr>
+            <td>nums</td>
+            <td>string</td>
+            <td>是</td>
+            <td>数量，多的以英文字符逗号分隔</td>
+        </tr>
+
+        <tr>
+            <td>user_num</td>
+            <td>int</td>
+            <td>是</td>
+            <td>订餐人数</td>
+        </tr>
+
+        <tr>
+            <td>table_title</td>
+            <td>string</td>
+            <td>是</td>
+            <td>桌号名称</td>
+        </tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id" : 1  表自增长数字
+            "order_num": "20181125174101IqGShmM" 订单编号
+        }
+    }
+}
+</code></pre>
+
+
+<h4><a name="id37">订单列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>订单列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>订单列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/order/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+        </tr>
+
+        <tr>
+            <td>table_title</td>
+            <td>int</td>
+            <td>否</td>
+            <td>桌号</td>
+        </tr>
+
+		<tr>
+			<td>status</td>
+			<td>int</td>
+			<td>否</td>
+            <td>订单状态： 0待结算，1已结算</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "11", 编号
+            "user_id": "8",  用户ID
+            "order_num": "20181125173422rwiOHzZe0bHL6Q7FnQ", 订单编号
+            "user_num": "1", 就餐人数
+            "table_title": "1", 桌号
+            "price": "0.00", 合计金额
+            "status": "0", 订单状态
+            "note": "", 备注
+            "add_time": "2018-11-25 17:34:22", 添加时间
+            "update_time": "0000-00-00 00:00:00",  修改时间
+            "status_title": "已下单"
+        }]
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id38">订单删除</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>订单删除</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>订单删除</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/order/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2"
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id39">订单查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>订单查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>订单查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/order/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "12", 编号
+            "user_id": "8", 用户ID
+            "order_num": "20181125173556SU7UVZmtvGkiijiI8u",  订单编号
+            "user_num": "1", 就餐人数
+            "table_title": "1号桌", 桌号
+            "price": "30.00", 订单金额
+            "status": "0", 状态
+            "note": "", 备注
+            "add_time": "2018-11-25 17:35:56", 下单时间
+            "update_time": "0000-00-00 00:00:00", 修改时间
+            "wait_user": "2", 当前等待人数
+            "status_title": "已下单", 订单状态名称
+            "order_detail": [
+                {
+                    "id": "5",  编号
+                    "user_id": "8", 用户ID
+                    "order_id": "12", 订单编号
+                    "product_id": "1", 菜品编号
+                    "num": "1", 数量
+                    "price": "10.00", 价格单位元
+                    "add_time": "0000-00-00 00:00:00", 添加时间
+                    "title": "测试1" 菜品名称
+                },
+                {
+                    "id": "6",
+                    "user_id": "8",
+                    "order_id": "12",
+                    "product_id": "2",
+                    "num": "2",
+                    "price": "20.00",
+                    "add_time": "0000-00-00 00:00:00",
+                    "title": "测试2"
+                }
+            ]
+        }
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id40">订单保存</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>订单保存</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>订单保存</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/order/save?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+        <tr>
+            <td>note</td>
+            <td>string</td>
+            <td>是</td>
+            <td>备注</td>
+        </tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "1"
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id42">前端-菜品管理列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>前端-菜品管理列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>前端-菜品管理列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/product/li?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+        <tr>
+            <td>category_id</td>
+            <td>int</td>
+            <td>否</td>
+            <td>分类ID</td>
+        </tr>
+
+        <tr>
+            <td>label_id</td>
+            <td>int</td>
+            <td>否</td>
+            <td>标签ID</td>
+        </tr>
+
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "2",  编号
+            "user_id": "8",  用户ID
+            "title": "测试2",  名称
+            "category_id": "3", 分类ID
+            "label_id": "12",  标签ID
+            "num": "0",   数量
+            "is_online": "1", 是否上架，1已上架，0下架
+            "price": "0.00",  价格
+            "img_url": "",  图片
+            "add_time": null,
+            "update_time": null,
+            "category_title": "牛肉", 分类名称
+            "label_title": "招牌"  标签名称
+        }]
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id41">订单打单</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>订单打单</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>订单打单</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+            http://git.localhost.com/smdc/api/order/printing?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "1"
+        }
+            
+    }
+}
+</code></pre>
+
+
+<h4><a name="id43">订单统计</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>订单统计</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>订单统计</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+http://git.localhost.com/smdc/api/orderday/statistics?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "total_order_count": "4", 订单总数量
+            "total_order_price": "15.00", 订单总营业额
+            "day_order_count": "3", 订单今日数量
+            "day_order_price": "14.00",订单今日营业额
+            "category_count": "2", 菜品分类数量
+            "product_count": "2"  菜品数量
+        }
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id44">订单统计查询按日期</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+            <th>订单统计查询按日期</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+            <td>订单统计查询按日期</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://git.localhost.com/smdc/api/orderday/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>day_min</td>
+			<td>int</td>
+			<td>否</td>
+			<td>开始日期</td>
+		</tr>
+
+		<tr>
+			<td>day_max</td>
+			<td>int</td>
+			<td>否</td>
+			<td>结束日期</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "1", 编号
+            "user_id": "8", 用户ID
+            "day": "20181125", 日期
+            "order_count": "1", 订单数量
+            "order_price": "2.00" 订单金额元
+        }]
+    }
+}
+</code></pre>
 
 
 

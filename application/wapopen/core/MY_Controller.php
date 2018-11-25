@@ -119,6 +119,9 @@ class MY_Controller extends CI_Controller
         $this->_user_id = $user_id;
         $this->_role = $one['role'];
 
+        Common::debug("user_id=".$this->_user_id);
+        Common::debug("role=".$this->_role);
+
     }
     
 	/**

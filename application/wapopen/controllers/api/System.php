@@ -1,8 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Table extends MY_Controller 
+class System extends MY_Controller 
 {	
-	private $model = "modeltable";
+	private $model = "modelsystem";
 	function __construct() 
 	{
 		parent::__construct();
@@ -37,16 +37,10 @@ class Table extends MY_Controller
 		}
 
 		$search = array();
-		$search['user_id'] = $this->_user_id;
 
-		if ( isset($data['title']) && !empty($data['title']) ) 
-		{
-			$search['%%title'] = $data['title'];
-		}
-		
 		$lists_all = $this->$model->lists($search, $page, $num, $order_by,$fields_str);
 		   
-		if(! is_array($lists_all))
+		if( !is_array($lists_all) )
 		{
 			$error_code = 20000 + abs($lists_all);
 			KsMessage::showError('get lists fail!','', $error_code);
@@ -66,18 +60,8 @@ class Table extends MY_Controller
 		$data = $this->req_param('GET');
 		$model = $this->model;
 
-		// 必需传递的参数
-		if(! isset($data[$this->$model->_primary] ) || empty($data[$this->$model->_primary])){
-			KsMessage::showError($this->$model->_primary.'不能为空哦','',10140);
-		}
-
-		// 需要查询的字段
-		$fields_str = $this->$model->deaf_fields_str;
-		if(isset($data['fields_str']) && !empty($data['fields_str'])){
-			$fields_str = $data['fields_str'];
-		}
-		
-		$one = $this->$model->one(array($this->$model->_primary=>$data[$this->$model->_primary]), $fields_str);
+		$lists_all = $this->$model->lists(array(), 1, 1);
+		$one = $lists_all['lists'][0];
 
 		if(!is_array($one)){
 			$error_code = 20000 + abs($one);
@@ -95,49 +79,42 @@ class Table extends MY_Controller
 		$mc_key = md5(serialize($data)."#".__CLASS__."#".__FUNCTION__);
 		$model = $this->model;
 
-		// 必须传递的参数
-		$_exist = $this->$model->_exist;
-		foreach ($_exist as $key => $va) 
-		{
-			if(! isset($data[$va]) && empty($data[$va]) )
-			{
-				KsMessage::errorMessageFields('10104', $va, 'api');
-			}
-		}
-
-		//判断唯一
-		$_unique = $this->$model->_unique;
-		foreach ($_unique as $key => $va) 
-		{
-			if( isset($data[$va]) && !empty($data[$va]) )
-			{
-				$search = array($va => $data[$va], 'user_id' => $this->_user_id);
-				$one = $this->$model->one($search);
-				if( !empty($one) )
-				{
-					KsMessage::errorMessage('20007');
-				}
-			}
-		}
-		
 		unset($data[$this->$model->_primary]);
-
-		$data['user_id'] = $this->_user_id;
-		$data['add_time'] = date('Y-m-d H:i:s');
 
 		// 防止重复提交
 		$this->checkRepeat($mc_key, 3);
 
-		$insert_id = $this->$model->insert($data);
-		if($insert_id <=0)
+		//判断是否有添加，有则更新否则则添加
+		$lists_all = $this->$model->lists(array(), 1, 1);
+		$one = $lists_all['lists'][0];
+
+		if( empty($one) )
 		{
-			$error_code = 20000 + abs ( $insert_id);
-			KsMessage::showError('insert fail', '', $error_code);
+			$insert_id = $this->$model->insert($data);
+			if( $insert_id <= 0 )
+			{
+				$error_code = 20000 + abs ( $insert_id);
+				KsMessage::showError('insert fail', '', $error_code);
+			}
+
+			$insert_info = array('id' => intval($insert_id));
+
+			KsMessage::showSucc('succ', $insert_info);
+		}
+		else 
+		{
+			$rs = $this->$model->update($one['id'], $data);
+			if(!$rs)
+			{
+				$error_code = 20000 + abs($rs);
+				KsMessage::showError('edit fail!','',$error_code);
+			}
+
+			$one = $this->$model->one(array($this->$model->_primary=>$one['id']));
+
+			KsMessage::showSucc("succ", $one);
 		}
 
-		$insert_info = array('id' => intval($insert_id));
-
-		KsMessage::showSucc('succ', $insert_info);
 	}
 	/**
 	 * 数据修改
@@ -175,7 +152,7 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20010');
 				}
 			}
 		}

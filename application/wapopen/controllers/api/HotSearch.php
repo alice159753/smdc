@@ -1,8 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Table extends MY_Controller 
+class HotSearch extends MY_Controller 
 {	
-	private $model = "modeltable";
+	private $model = "modelhotsearch";
 	function __construct() 
 	{
 		parent::__construct();
@@ -115,13 +115,13 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20009');
 				}
 			}
 		}
-		
-		unset($data[$this->$model->_primary]);
 
+		unset($data[$this->$model->_primary]);
+		
 		$data['user_id'] = $this->_user_id;
 		$data['add_time'] = date('Y-m-d H:i:s');
 
@@ -175,7 +175,7 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20009');
 				}
 			}
 		}

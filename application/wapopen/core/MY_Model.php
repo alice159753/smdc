@@ -23,7 +23,10 @@ class MY_Model extends CI_Model
 	
 	//当前表主键
 	public $_primary = 'id';
-	
+
+	//批量添加
+	public $_lists = array(); 
+
 	//当前表的字段类型
 	public $_fields = array('int' => array(), 'string' => array(), 'time' => array(), 'unformat' => array(), 'lists_nosearch' => array());
 	
@@ -196,7 +199,6 @@ class MY_Model extends CI_Model
 		$query = self::_query($sql, $search_deal, $db_select);
 		if (!$query) { return 0; }
 		$one = $query->row_array();
-		$one = empty($one) ? array() : $one;
 
 		return $one;
 	}
@@ -267,7 +269,7 @@ class MY_Model extends CI_Model
 		$where_str = "`{$this->_primary}` = ?";
 		$where_arr[] = $id;
 		
-		if( $this->_role == 'user' && $this->_table_name != 'smdc_user' )
+		if( $this->_role == 'user' && !in_array($this->_table_name, array('smdc_user', 'smdc_system')) )
 		{
 			$where_str .= ' AND user_id = '. $this->_user_id;
 		}
@@ -431,7 +433,7 @@ class MY_Model extends CI_Model
 		$where_str = "`{$this->_primary}` = ?";
 		$where_arr[] = $id;
 
-		if( $this->_role == 'user' && $this->_table_name != 'smdc_user' )
+		if( $this->_role == 'user' && !in_array($this->_table_name, array('smdc_user', 'smdc_system')) )
 		{
 			$where_str .= ' AND user_id = '. $this->_user_id;
 		}
@@ -449,7 +451,7 @@ class MY_Model extends CI_Model
 	 * @param string  $db_select   数据库主从选择
 	 * @retrun object
 	 */
-	private function dbConnect($db_select = 'slave')
+	public function dbConnect($db_select = 'slave')
 	{
 		//确认数据库选取类型
 		if (isset($_REQUEST['db_select']) && $_REQUEST['db_select'] == 'master')
@@ -770,6 +772,39 @@ class MY_Model extends CI_Model
 	{
 		return array_merge($this->_fields['int'], $this->_fields['string'], $this->_fields['time']);
 	}
+
+	
+    function addRow($dataRow)
+    {
+        $this->_lists[] = $dataRow;
+
+        if (count($this->_lists) >= 100) 
+        {
+            $this->_batch($this->_table_name);    //批量写入
+        }
+        
+        return true;
+    }
+
+	//批量写入
+    function batch()
+    {
+        if ( empty($this->_lists) ) 
+        {
+            return true;
+        }
+		
+		$this->_db_m = self::dbConnect('master');
+
+        $n = count($this->_lists);
+        $this->_db_m->insert_batch($this->_table_name, $this->_lists);
+        $r = $this->_db_m->affected_rows();
+      
+        $this->_lists = array();   //清空数据
+
+        $this->_db_m->queries = array ();
+        $this->_db_m->query_times = array ();
+    }
 }
 
 
