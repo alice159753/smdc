@@ -263,10 +263,15 @@ class MY_Model extends CI_Model
 		$action = $this->uri->uri_string();
 		
 		if (empty($set_str)) { return 1; }
-		
+
 		$where_str = "`{$this->_primary}` = ?";
 		$where_arr[] = $id;
 		
+		if( $this->_role == 'user' && $this->_table_name != 'smdc_user' )
+		{
+			$where_str .= ' AND user_id = '. $this->_user_id;
+		}
+
 		$sql = "UPDATE `{$this->_table_name}` SET {$set_str} WHERE {$where_str} -- {$action}";
 		$where_arr = array_merge(array_values($data_deal), $where_arr);
 		$query = self::_query($sql, $where_arr, "master");
@@ -425,6 +430,12 @@ class MY_Model extends CI_Model
 	{
 		$where_str = "`{$this->_primary}` = ?";
 		$where_arr[] = $id;
+
+		if( $this->_role == 'user' && $this->_table_name != 'smdc_user' )
+		{
+			$where_str .= ' AND user_id = '. $this->_user_id;
+		}
+
 		$action = $this->uri->uri_string();
 		$sql = "DELETE FROM `{$this->_table_name}` WHERE {$where_str} -- {$action}";
 		$query = self::_query($sql, $where_arr, "master");

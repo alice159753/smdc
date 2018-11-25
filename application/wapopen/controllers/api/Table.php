@@ -76,8 +76,8 @@ class Table extends MY_Controller
 		if(isset($data['fields_str']) && !empty($data['fields_str'])){
 			$fields_str = $data['fields_str'];
 		}
-
-		$one = $this-> $model->one($data,$fields_str);
+		
+		$one = $this->$model->one(array($this->$model->_primary=>$data[$this->$model->_primary]), $fields_str);
 
 		if(!is_array($one)){
 			$error_code = 20000 + abs($one);
@@ -180,7 +180,10 @@ class Table extends MY_Controller
 
 		$data['update_time'] = date('Y-m-d H:i:s');
 
-		$rs = $this->$model->update(array($this->$model->_primary => $data[$this->$model->_primary], 'user_id' => $this->_user_id), $data);
+		$id = $data[$this->$model->_primary];
+		unset($data[$this->$model->_primary]);
+
+		$rs = $this->$model->update($id, $data);
 
 		if(!$rs)
 		{
@@ -188,7 +191,7 @@ class Table extends MY_Controller
 			KsMessage::showError('edit fail!','',$error_code);
 		}
 
-		$one = $this->$model->one(array($this->$model->_primary=>$data[$this->$model->_primary]));
+		$one = $this->$model->one(array($this->$model->_primary=>$id));
 
 		KsMessage::showSucc("succ", $one);
 	}
@@ -206,7 +209,7 @@ class Table extends MY_Controller
 			KsMessage::showError($this->$model->_primary.'不能为空哦','',10140);
 		}
 
-		$rs = $this->$model->delete(array($this->$model->_primary=>$data[$this->$model->_primary], 'user_id' => $this->_user_id));
+		$rs = $this->$model->delete($data[$this->$model->_primary]);
 
 		if(!$rs)
 		{
@@ -214,7 +217,9 @@ class Table extends MY_Controller
 			KsMessage::showError('edit fail!', '', $error_code);
 		}
 
-		KsMessage::showSucc("succ", $data);
+		$info = array('id' => intval($data[$this->$model->_primary]));
+
+		KsMessage::showSucc("succ", $info);
 	}
 	
 	

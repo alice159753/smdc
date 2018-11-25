@@ -110,13 +110,15 @@ class MY_Controller extends CI_Controller
 			KsMessage::errorMessage('10114');
         }
 
-        $one = $this->modeluser->one(array('user_id' => $user_id));
+        $one = $this->modeluser->one(array('id' => $user_id));
         if( empty($one) )
         {
 			KsMessage::errorMessage('10115');
         }
 
         $this->_user_id = $user_id;
+        $this->_role = $one['role'];
+
     }
     
 	/**

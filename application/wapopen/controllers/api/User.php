@@ -157,8 +157,6 @@ class User extends MY_Controller
 
 		$data['update_time'] = date('Y-m-d H:i:s');
 
-		unset($data['account']);
-
 		if( isset($data['password']) && !empty($data['password']) )
 		{
 			//生成密码
@@ -166,16 +164,29 @@ class User extends MY_Controller
 			$data['password'] = md5($data['password'] . $data['salt']);
 		}
 
-		$rs = $this->$model->update(array($this->$model->_primary=>$this->_user_id), $data);
+		$id = isset($data[$this->$model->_primary]) ? $data[$this->$model->_primary] : 0;
+		unset($data[$this->$model->_primary]);
+		unset($data['account']);
+
+		if( $this->_role == 'user' )
+		{
+			$rs = $this->$model->update($this->_user_id, $data);
+
+			$id = $this->_user_id;
+		}
+		else 
+		{
+			$rs = $this->$model->update($id, $data);
+		}
 
 		if( !$rs )
 		{
 			KsMessage::errorMessage('10110');
 		}
-		
-		$one = $this->$model->one(array($this->$model->_primary=>$this->_user_id));
 
-		unset($one['password'], $one['salt'], $one['id']);
+		$one = $this->$model->one(array($this->$model->_primary=>$id));
+
+		unset($one['password'], $one['salt']);
 
 		KsMessage::showSucc("succ", $one);
 	}
