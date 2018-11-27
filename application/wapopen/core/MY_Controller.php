@@ -33,6 +33,11 @@ class MY_Controller extends CI_Controller
         $key_info = $this->config->item('config/config');
         $key_info = Common::arrChangeKey($key_info['key_info'], 'api_key');
 
+        if( !isset($_REQUEST['api_key']) || empty($_REQUEST['api_key']) )
+        {
+			KsMessage::showError('api_key error!', '', '1003');
+        }
+
         if ( !isset($key_info[ $_REQUEST['api_key'] ]) )
 		{
 			KsMessage::showError('api_key error!', '', '1003');
