@@ -263,6 +263,39 @@ class User extends MY_Controller
 
 		KsMessage::showSucc("succ", $one);
 	}
+
+	/**
+	 * 修改密码
+	 */
+	function modify_password()
+	{
+		$model = $this->model;
+		$data = $this->req_param();
+
+		if( !isset($data['password']) || empty($data['password']) )
+		{
+			KsMessage::errorMessage('20002');
+		}
+
+		//生成密码
+		$update = array();
+		$update['salt'] = Common::myRandom(3, 32);
+		$update['password'] = md5($data['password'] . $data['salt']);
+		$update['update_time'] = date('Y-m-d H:i:s');
+
+		$rs = $this->$model->update($this->_user_id, $update);
+
+		if( !$rs )
+		{
+			KsMessage::errorMessage('10110');
+		}
+
+		$one = $this->$model->one(array($this->$model->_primary=>$id));
+
+		unset($one['password'], $one['salt']);
+
+		KsMessage::showSucc("succ", $one);
+	}
 	
 
 }
