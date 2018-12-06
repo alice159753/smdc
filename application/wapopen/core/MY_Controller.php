@@ -33,6 +33,12 @@ class MY_Controller extends CI_Controller
         $key_info = $this->config->item('config/config');
         $key_info = Common::arrChangeKey($key_info['key_info'], 'api_key');
 
+        //从header获取公共参数
+        if( isset($_SERVER['HTTP_API_KEY']) && !empty($_SERVER['HTTP_API_KEY']) )
+        {
+            $_REQUEST['api_key'] = $_SERVER['HTTP_API_KEY'];
+        }
+
         if( !isset($_REQUEST['api_key']) || empty($_REQUEST['api_key']) )
         {
 			KsMessage::showError('api_key error!', '', '1003');

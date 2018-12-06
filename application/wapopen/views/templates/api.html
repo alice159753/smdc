@@ -238,7 +238,7 @@
 </style>
 
 
-    <script>
+    s<script>
         window.onload = function () {
             var hash = window.location.hash;
             if (hash.indexOf('#') < 0) {
@@ -281,6 +281,7 @@
         <li><a href="#id4" id="a_href4">账号修改</a></li>
         <li><a href="#id7" id="a_href7">账号删除</a></li>
         <li><a href="#id8" id="a_href8">账号查询</a></li>
+		<li><a href="#id45" id="a_href45">前端-店铺查询</a></li>
 
         <!-- <li><a href="#id9"  id="a_href9">桌号列表</a></li>
         <li><a href="#id10" id="a_href10">桌号添加</a></li>
@@ -608,7 +609,14 @@ http://www.ec2order.com/api/user/add?api_key=23166839&account=admin&password=123
             <td>string</td>
             <td>否</td>
             <td>其他备注</td>
-        </tr>
+		</tr>
+		
+		<tr>
+			<td>special_note</td>
+			<td>string</td>
+			<td>否</td>
+			<td>特别介绍</td>
+		</tr>
 
 	</tbody>
 </table>
@@ -767,7 +775,12 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
 			<td>否</td>
 			<td>其他备注</td>
 		</tr>
-
+		<tr>
+			<td>special_note</td>
+			<td>string</td>
+			<td>否</td>
+			<td>特别介绍</td>
+		</tr>
 	</tbody>
 </table>
 
@@ -796,7 +809,8 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
             "role": "admin", 角色： admin 超级管理员 user用户
             "is_delete": "0", 是否关闭，1已关闭，0未关闭
             "add_time": null, 添加时间
-            "update_time": null, 更新时间
+			"update_time": null, 更新时间
+			"special_note" : '' 特别介绍
         }
     }
 }
@@ -979,21 +993,24 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
         },
         "data": 
         [{
-            "id": "3", 编号
-            "account": "admin", 账号
-            "shop_name": "", 店铺名称
-            "shop_address": "", 店铺地址
-            "contact_phone": "", 联系电话
-            "shop_owner_name": "", 店长名称
-            "shop_owner_phone": "", 店长电话
-            "business_hours": "", 营业时间
-            "shop_img_url": "", 店铺图片
-            "shop_note": "", 店铺备注
-            "other_note": null, 其他说明
-            "role": "admin", 角色： admin 超级管理员 user用户
-            "is_delete": "0", 是否关闭，1已关闭，0未关闭
-            "add_time": null, 添加时间
-            "update_time": null, 更新时间
+			"id": "3", 编号
+			"account": "admin", 账号
+			"shop_name": "", 店铺名称
+			"shop_address": "", 店铺地址
+			"contact_phone": "", 联系电话
+			"shop_owner_name": "", 店长名称
+			"shop_owner_phone": "", 店长电话
+			"business_hours": "", 营业时间
+			"shop_img_url": "", 店铺图片
+			"shop_note": "", 店铺备注
+			"other_note": null, 其他说明
+			"role": "admin", 角色： admin 超级管理员 user用户
+			"is_delete": "0", 是否关闭，1已关闭，0未关闭
+			"add_time": null, 添加时间
+			"update_time": null, 更新时间
+			"special_note" : '' 特别介绍
+			"show_password" : '' 明文密码
+
         }]
     }
 }
@@ -1177,7 +1194,8 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
             "role": "admin", 角色： admin 超级管理员 user用户
             "is_delete": "0", 是否关闭，1已关闭，0未关闭
             "add_time": null, 添加时间
-            "update_time": null, 更新时间
+			"update_time": null, 更新时间
+			"special_note": "" 特别介绍						
         }
             
     }
@@ -2092,7 +2110,7 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
 		<tr>
 			<td>接口地址</td>
 			<td>
-				http://www.ec2order.com/api/hotsearch/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+				http://www.ec2order.com/api/hotSearch/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
 			</td>
 		</tr>
 		<tr>
@@ -2180,7 +2198,7 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
 		<tr>
 			<td>接口地址</td>
 			<td>
-				http://www.ec2order.com/api/hotsearch/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=1号桌
+				http://www.ec2order.com/api/hotSearch/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=1号桌
 			</td>
 		</tr>
 		<tr>
@@ -2264,7 +2282,7 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
 		<tr>
 			<td>接口地址</td>
 			<td>
-				http://www.ec2order.com/api/hotsearch/edit?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=234
+				http://www.ec2order.com/api/hotSearch/edit?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=234
 			</td>
 		</tr>
 		<tr>
@@ -2360,7 +2378,7 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
 		<tr>
 			<td>接口地址</td>
 			<td>
-				http://www.ec2order.com/api/hotsearch/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+				http://www.ec2order.com/api/hotSearch/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
 			</td>
 		</tr>
 		<tr>
@@ -2444,7 +2462,7 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
 		<tr>
 			<td>接口地址</td>
 			<td>
-				http://www.ec2order.com/api/hotsearch/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
+				http://www.ec2order.com/api/hotSearch/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
 			</td>
 		</tr>
 		<tr>
@@ -3572,28 +3590,28 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
 
 		<tr>
             <td>contact_us</td>
-			<td>int</td>
+			<td>string</td>
 			<td>否</td>
 			<td>联系我们</td>
 		</tr>
 
 		<tr>
             <td>user_use_info</td>
-			<td>int</td>
+			<td>string</td>
 			<td>否</td>
             <td>用户使用说明</td>
 		</tr>
 
 		<tr>
             <td>about_us</td>
-			<td>int</td>
+			<td>string</td>
 			<td>否</td>
 			<td>关于我们</td>
 		</tr>
 
         <tr>
             <td>system_info</td>
-            <td>int</td>
+            <td>string</td>
             <td>否</td>
             <td>系统说明</td>
         </tr>
@@ -4407,7 +4425,7 @@ http://www.ec2order.com/api/order/add?api_key=23166839&post_change_get=1&user_to
 		<tr>
 			<td>接口地址</td>
 			<td>
-http://www.ec2order.com/api/orderday/statistics?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+http://www.ec2order.com/api/orderDay/statistics?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
 			</td>
 		</tr>
 		<tr>
@@ -4489,7 +4507,7 @@ http://www.ec2order.com/api/orderday/statistics?api_key=23166839&&post_change_ge
 		<tr>
 			<td>接口地址</td>
 			<td>
-				http://www.ec2order.com/api/orderday/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+				http://www.ec2order.com/api/orderDay/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
 			</td>
 		</tr>
 		<tr>
@@ -4559,6 +4577,98 @@ http://www.ec2order.com/api/orderday/statistics?api_key=23166839&&post_change_ge
     }
 }
 </code></pre>
+
+
+
+<h4><a name="id45">前端-店铺查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>前端-店铺查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>前端-店铺查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/user/shopinfo?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "account": "admin", 账号
+            "shop_name": "", 店铺名称
+            "shop_address": "", 店铺地址
+            "contact_phone": "", 联系电话
+            "shop_owner_name": "", 店长名称
+            "shop_owner_phone": "", 店长电话
+            "business_hours": "", 营业时间
+            "shop_img_url": "", 店铺图片
+            "shop_note": "", 店铺备注
+            "other_note": null, 其他说明
+            "role": "admin", 角色： admin 超级管理员 user用户
+            "is_delete": "0", 是否关闭，1已关闭，0未关闭
+            "add_time": null, 添加时间
+			"update_time": null, 更新时间
+			"special_note": "" 特别介绍						
+        }
+            
+    }
+}
+</code></pre>
+
 
 
 

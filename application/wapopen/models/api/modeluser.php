@@ -12,7 +12,7 @@ class Modeluser extends MY_Model
     //数据库表对应的字段类型
     public $_fields = array(
         'int' => array('id','is_delete'),
-        'string' => array('account','account','password','salt','shop_name','shop_address','contact_phone','shop_owner_name','shop_owner_phone','business_hours','shop_img_url','shop_note','other_note','role'),
+        'string' => array('account','account','password','salt','shop_name','shop_address','contact_phone','shop_owner_name','shop_owner_phone','business_hours','shop_img_url','shop_note','other_note','role','special_note','show_password'),
         'time' => array('add_time','update_time'),
         'unformat' => array(),
         'lists_nosearch' => array()
@@ -21,7 +21,7 @@ class Modeluser extends MY_Model
     public $_exist = array('account', 'password');
     public $_unique = array('account');
 
-    public $deaf_fields_str = 'id,account,password,salt,shop_name,shop_address,contact_phone,shop_owner_name,shop_owner_phone,business_hours,shop_img_url,shop_note,other_note,role,is_delete,add_time,update_time';
+    public $deaf_fields_str = 'id,account,password,salt,shop_name,shop_address,contact_phone,shop_owner_name,shop_owner_phone,business_hours,shop_img_url,shop_note,other_note,role,is_delete,add_time,update_time,special_note,show_password';
 
     //不需要处理的字段的数组
     public $_unformat = array();

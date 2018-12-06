@@ -30,7 +30,7 @@ class User extends MY_Controller
         $this->sqltools->dealData($data);
 
         // 需要查询的字段
-        $fields_str = 'id,account,shop_name,shop_address,contact_phone,shop_owner_name,shop_owner_phone,business_hours,shop_img_url,shop_note,other_note,role,is_delete,add_time,update_time';
+        $fields_str = 'id,account,shop_name,shop_address,contact_phone,shop_owner_name,shop_owner_phone,business_hours,shop_img_url,shop_note,other_note,role,is_delete,add_time,update_time,special_note,show_password';
 
 		$search = array();
 		$search['is_delete'] = 0;
@@ -80,7 +80,7 @@ class User extends MY_Controller
 		}
 
 		// 需要查询的字段
-		$fields_str = 'id,account,shop_name,shop_address,contact_phone,shop_owner_name,shop_owner_phone,business_hours,shop_img_url,shop_note,other_note,role,is_delete,add_time,update_time';
+		$fields_str = 'id,account,shop_name,shop_address,contact_phone,shop_owner_name,shop_owner_phone,business_hours,shop_img_url,shop_note,other_note,role,is_delete,add_time,update_time,special_note,show_password';
 
 		$one = $this->$model->one(array($this->$model->_primary=>$data[$this->$model->_primary]), $fields_str);
 
@@ -134,6 +134,7 @@ class User extends MY_Controller
 		$this->checkRepeat($mc_key, 3);
 
 		//生成密码
+		$data['show_password'] = $data['password'];
 		$data['salt'] = Common::myRandom(3, 32);
 		$data['password'] = md5($data['password'] . $data['salt']);
 
@@ -160,11 +161,12 @@ class User extends MY_Controller
 		if( isset($data['password']) && !empty($data['password']) )
 		{
 			//生成密码
+			$data['show_password'] = $data['password'];
 			$data['salt'] = Common::myRandom(3, 32);
 			$data['password'] = md5($data['password'] . $data['salt']);
 		}
 
-		$id = isset($data[$this->$model->_primary]) ? $data[$this->$model->_primary] : 0;
+		$id = isset($data[$this->$model->_primary]) ? $data[$this->$model->_primary] : $this->_user_id;
 		unset($data[$this->$model->_primary]);
 		unset($data['account']);
 
@@ -297,5 +299,27 @@ class User extends MY_Controller
 		KsMessage::showSucc("succ", $one);
 	}
 	
+	/**
+	 *  店铺信息
+	 */
+	function shopinfo()
+	{
+		$data = $this->req_param('GET');
+		$model = $this->model;
+
+		// 需要查询的字段
+		$fields_str = 'id,account,shop_name,shop_address,contact_phone,shop_owner_name,shop_owner_phone,business_hours,shop_img_url,shop_note,other_note,role,is_delete,add_time,update_time,special_note,show_password';
+
+		$one = $this->$model->one(array($this->$model->_primary=>$this->_user_id), $fields_str);
+
+		if(!is_array($one))
+		{
+			$error_code = 20000 + abs($one);
+			KsMessage::showError('get one','',$error_code);
+		}
+
+		KsMessage::showSucc('succ',$one);
+	}
+
 
 }

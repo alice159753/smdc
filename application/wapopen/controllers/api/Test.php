@@ -6,6 +6,11 @@ class Test extends CI_Controller
     {
         $this->load->view('templates/test.html');
     }
+
+    public function print_sev()
+    {
+        print_r($_SERVER);
+    }
 }
 
 
