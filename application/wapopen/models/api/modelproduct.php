@@ -11,7 +11,7 @@ class Modelproduct extends MY_Model
 
     //数据库表对应的字段类型
     public $_fields = array(
-        'int' => array('id','user_id','category_id','label_id','num','is_online'),
+        'int' => array('id','user_id','category_id','label_id','num','is_online','sale_num'),
         'string' => array('title','price','img_url'),
         'time' => array('add_time','update_time'),
         'unformat' => array(),
@@ -21,7 +21,7 @@ class Modelproduct extends MY_Model
     public $_exist = array('title','category_id');
     public $_unique = array();
 
-    public $deaf_fields_str = 'id,user_id,title,category_id,label_id,num,is_online,price,img_url,add_time,update_time';
+    public $deaf_fields_str = 'id,user_id,title,category_id,label_id,num,is_online,price,img_url,add_time,update_time,sale_num';
 
     //不需要处理的字段的数组
     public $_unformat = array();
@@ -39,8 +39,8 @@ class Modelproduct extends MY_Model
 
     function deduct($product_id, $field, $num)
 	{
-		$sql = "UPDATE {$this->_table_name} SET `{$field}`=`{$field}`- ? WHERE id = ?";
-		$this->_query($sql, array($num, $product_id));
+		$sql = "UPDATE {$this->_table_name} SET `{$field}`=`{$field}`- ?, `sale_num`=`sale_num`+ ? WHERE id = ?";
+		$this->_query($sql, array($num,$num,$product_id));
     }
     
 }
