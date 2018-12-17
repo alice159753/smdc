@@ -153,6 +153,20 @@ class Order extends MY_Controller
 		// 防止重复提交
 		$this->checkRepeat($mc_key, 3);
 
+		//检查这个桌子当前是否已经有人下单了
+		$search = array();
+		$search['user_id'] = $this->_user_id;
+		$search['table_title'] = $data['table_title'];
+		$search['status'] = 0;
+
+		//如果已经有一个桌子已经处于点餐的状态，继续点餐的话，则往订单里面加菜
+		$li = $this->$model->lists($search,1,1);
+		if( count($li['lists']) > 0 )
+		{
+			$this->append_add($data, $li['lists'][0]);
+			exit;
+		}
+
 		$order_num = $this->$model->make_order_num();
 		$data['order_num'] = $order_num;
 
@@ -198,8 +212,8 @@ class Order extends MY_Controller
 			$dataArray['order_id']   = $insert_id;
 			$dataArray['product_id'] = $product_ids[$i];
 			$dataArray['num']        = $nums[$i];
-			$dataArray['price']      = isset($productMap[ $product_ids[$i] ]) ? $productMap[ $product_ids[$i] ]['price'] : 0;
-			$dataArray['add_time']   = date('Y-m-d H: i:s');
+			$dataArray['price']      = isset($productMap[ $product_ids[$i] ]) ? $productMap[ $product_ids[$i] ]['price'] * $nums[$i] : 0;
+			$dataArray['add_time']   = date('Y-m-d H:i:s');
 
 			$this->modelorderdetail->addRow($dataArray);
 
@@ -216,7 +230,7 @@ class Order extends MY_Controller
 		$insert_info['id'] = $insert_id;
 		$insert_info['order_num'] = $order_num;
 
-		$this->$model->update($insert_id, array('price' => $total_price));
+		$this->$model->update($insert_id, array('price' => $total_price, 'update_time' => date('Y-m-d H:i:s')));
 
 		//更新统计表
 		$this->load->model('api/modelorderday', 'modelorderday');
@@ -224,6 +238,96 @@ class Order extends MY_Controller
 
 		KsMessage::showSucc('succ', $insert_info);
 	}
+
+	function append_add($data, $order)
+	{
+		$model = $this->model;
+
+		$order_num = $order['order_num'];
+		$order_id = $order['id'];
+
+		//获得所有的菜品信息
+		$this->load->model('api/modelproduct', 'modelproduct');
+		$product = $this->modelproduct->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 100);
+		$productMap = Common::arrChangeKey($product['lists'], 'id');
+
+		//添加订单详情
+		$product_ids = explode(",", $data['product_ids']);
+		$nums = explode(",", $data['nums']);
+
+		//获取订单商品详情
+		$this->load->model('api/modelorderdetail', 'modelorderdetail');
+		$orderdetail = $this->modelorderdetail->lists(array('user_id' => $this->_user_id, 'order_id' => $order_id), 1, 1000);
+		$orderdetail = $orderdetail['lists'];
+		$orderdetail = Common::arrChangeKey($orderdetail, 'product_id');
+
+		$total_price = 0;
+		$total_num = 0;
+
+		for($i = 0; isset($product_ids[$i]); $i++)
+		{
+			//判断菜品是否存在
+			if( !isset($productMap[ $product_ids[$i] ]) )
+			{
+				KsMessage::errorMessage('20014');
+			}
+
+			//检查菜品数量是否充足
+			if( $productMap[ $product_ids[$i] ]['num'] < $nums[$i] )
+			{
+				KsMessage::errorMessage('20016');
+			}
+
+			//判断是否是已添加商品,已添加则更新商品详情
+			if( isset($orderdetail[ $product_ids[$i] ] ) )
+			{
+				$dataArray = array();
+				$dataArray['num']        = $nums[$i] + $orderdetail[ $product_ids[$i] ]['num'];
+				$dataArray['price']      = isset($productMap[ $product_ids[$i] ]) ? $productMap[ $product_ids[$i] ]['price'] * $nums[$i] : 0;
+				$dataArray['price']      =  $dataArray['price'] + $orderdetail[ $product_ids[$i] ]['price'];
+
+				$this->modelorderdetail->update($orderdetail[ $product_ids[$i] ]['id'], $dataArray);
+
+				$total_price += $dataArray['price'];
+				$total_num += $dataArray['num'];
+
+				//扣除菜品的数量
+				$this->modelproduct->deduct($product_ids[$i], 'num', $nums[$i]);
+
+				continue;
+			}
+
+			$dataArray = array();
+			$dataArray['user_id']    = $this->_user_id;
+			$dataArray['order_id']   = $order_id;
+			$dataArray['product_id'] = $product_ids[$i];
+			$dataArray['num']        = $nums[$i];
+			$dataArray['price']      = isset($productMap[ $product_ids[$i] ]) ? $productMap[ $product_ids[$i] ]['price'] * $nums[$i] : 0;
+			$dataArray['add_time']   = date('Y-m-d H:i:s');
+
+			$this->modelorderdetail->addRow($dataArray);
+
+			$total_price += $dataArray['price'];
+			$total_num += $dataArray['num'];
+
+			//扣除菜品的数量
+			$this->modelproduct->deduct($product_ids[$i], 'num', $nums[$i]);
+		}
+
+		$this->modelorderdetail->batch();
+
+		$this->$model->update($order_id, array('price' => $total_price, 'update_time' => date('Y-m-d H:i:s')));
+
+		$order['price'] = $total_price;
+		$order['update_time'] = date('Y-m-d H:i:s');
+
+		//更新统计表
+		$this->load->model('api/modelorderday', 'modelorderday');
+		$this->modelorderday->addnum($this->_user_id, 0, $total_price);
+
+		KsMessage::showSucc('succ', $order);
+	}
+
 	/**
 	 * 数据修改
 	 */
