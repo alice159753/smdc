@@ -43,7 +43,7 @@ class Order extends MY_Controller
 
 		if ( isset($data['table_title']) && !empty($data['table_title']) ) 
 		{
-			$search['%%table_title'] = $data['table_title'];
+			$search['%table_title%'] = $data['table_title'];
 		}
 
 		if ( isset($data['status']) && is_numeric($data['status']) ) 
@@ -104,8 +104,13 @@ class Order extends MY_Controller
 
 		//获得所有的菜品
 		$this->load->model('api/modelproduct', 'modelproduct');
-		$product = $this->modelproduct->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 100);
+		$product = $this->modelproduct->lists(array('user_id' => $this->_user_id), 1, 1000);
 		$productMap = Common::arrChangeKey($product['lists'], 'id');
+
+		//获取赠品信息
+		$this->load->model('api/modelproductgift', 'modelproductgift');
+		$productgift = $this->modelproductgift->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 1000);
+		$productgiftMap = Common::arrChangeKey($productgift['lists'], 'id');
 
 		$this->load->model('api/modelorderdetail', 'modelorderdetail');
 		$order_detail = $this->modelorderdetail->lists(array('user_id' => $this->_user_id, 'order_id' => $one['id']), 1, 100);
@@ -114,6 +119,11 @@ class Order extends MY_Controller
 		foreach ($order_detail as $key => $value)
 		{
 			$value['title'] = isset($productMap[$value['product_id']]) ? $productMap[$value['product_id']]['title'] : '';
+
+			if( !empty($value['product_gift_id']) )
+			{
+				$value['title'] = isset($productgiftMap[$value['product_gift_id']]) ? $productgiftMap[$value['product_gift_id']]['title'] : '';
+			}
 
 			$one['order_detail'][] = $value;
 		}
@@ -150,6 +160,11 @@ class Order extends MY_Controller
 			KsMessage::errorMessage('20015');
 		}
 
+		if( !isset($data['gift_ids']) )
+		{
+			KsMessage::errorMessage('20018');
+		}
+
 		// 防止重复提交
 		$this->checkRepeat($mc_key, 3);
 
@@ -167,9 +182,27 @@ class Order extends MY_Controller
 			exit;
 		}
 
+		//检查菜品是否充分且是否存在
+		//获得所有的菜品信息
+		$this->load->model('api/modelproduct', 'modelproduct');
+		$product = $this->modelproduct->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 1000);
+		$productMap = Common::arrChangeKey($product['lists'], 'id');
+
+		//获取赠品信息
+		$this->load->model('api/modelproductgift', 'modelproductgift');
+		$productgift = $this->modelproductgift->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 1000);
+		$productgiftMap = Common::arrChangeKey($productgift['lists'], 'id');
+
+		//添加订单详情
+		$product_ids = explode(",", $data['product_ids']);
+		$nums = explode(",", $data['nums']);
+		$gift_ids = explode(",", $data['gift_ids']);
+
+		$this->check_product($product_ids,$nums,$productMap);
+		$this->check_gift($product_ids,$nums,$gift_ids,$productMap,$productgiftMap);
+
 		$order_num = $this->$model->make_order_num();
 		$data['order_num'] = $order_num;
-
 		$data['user_id'] = $this->_user_id;
 		$data['add_time'] = date('Y-m-d H:i:s');
 		$data['status'] = 0;
@@ -181,36 +214,17 @@ class Order extends MY_Controller
 			KsMessage::showError('insert fail', '', $error_code);
 		}
 
-		//添加订单详情
-		$product_ids = explode(",", $data['product_ids']);
-		$nums = explode(",", $data['nums']);
-
-		//获得所有的菜品信息
-		$this->load->model('api/modelproduct', 'modelproduct');
-		$product = $this->modelproduct->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 100);
-		$productMap = Common::arrChangeKey($product['lists'], 'id');
-
 		$total_price = 0;
 		$total_num = 0;
 
+		//菜品扣除
 		for($i = 0; isset($product_ids[$i]); $i++)
 		{
-			//判断菜品是否存在
-			if( !isset($productMap[ $product_ids[$i] ]) )
-			{
-				KsMessage::errorMessage('20014');
-			}
-
-			//检查菜品数量是否充足
-			if( $productMap[ $product_ids[$i] ]['num'] < $nums[$i] )
-			{
-				KsMessage::errorMessage('20016');
-			}
-
 			$dataArray = array();
 			$dataArray['user_id']    = $this->_user_id;
 			$dataArray['order_id']   = $insert_id;
 			$dataArray['product_id'] = $product_ids[$i];
+			$dataArray['product_gift_id'] = 0;
 			$dataArray['num']        = $nums[$i];
 			$dataArray['price']      = isset($productMap[ $product_ids[$i] ]) ? $productMap[ $product_ids[$i] ]['price'] * $nums[$i] : 0;
 			$dataArray['add_time']   = date('Y-m-d H:i:s');
@@ -224,6 +238,32 @@ class Order extends MY_Controller
 			$this->modelproduct->deduct($product_ids[$i], 'num', $nums[$i]);
 		}
 
+		//赠品扣除
+		for($i = 0; isset($gift_ids[$i]); $i++)
+		{
+			if( empty($gift_ids[$i]) )
+			{
+				continue;
+			}
+
+			$dataArray = array();
+			$dataArray['user_id']    = $this->_user_id;
+			$dataArray['order_id']   = $insert_id;
+			$dataArray['product_id'] = 0;
+			$dataArray['product_gift_id'] = $gift_ids[$i];
+			$dataArray['num']        = $nums[$i];
+			$dataArray['price']      = isset($productgiftMap[ $gift_ids[$i] ]) ? $productgiftMap[ $gift_ids[$i] ]['price'] * $nums[$i] : 0;
+			$dataArray['add_time']   = date('Y-m-d H:i:s');
+
+			$this->modelorderdetail->addRow($dataArray);
+
+			$total_price += $dataArray['price'];
+			$total_num += $dataArray['num'];
+
+			//扣除菜品的数量
+			$this->modelproductgift->deduct($gift_ids[$i], 'num', $nums[$i]);
+		}
+
 		$this->modelorderdetail->batch();
 
 		$insert_info = array();
@@ -234,36 +274,14 @@ class Order extends MY_Controller
 
 		//更新统计表
 		$this->load->model('api/modelorderday', 'modelorderday');
-		$this->modelorderday->addnum($this->_user_id, 1, $total_price);
+		$orderday = $this->$model->getTodayTotalPrice($this->_user_id);
+		$this->modelorderday->addnum($this->_user_id, $orderday['total_num'], $orderday['total_price']);
 
 		KsMessage::showSucc('succ', $insert_info);
 	}
 
-	function append_add($data, $order)
+	function check_product($product_ids,$nums,$productMap)
 	{
-		$model = $this->model;
-
-		$order_num = $order['order_num'];
-		$order_id = $order['id'];
-
-		//获得所有的菜品信息
-		$this->load->model('api/modelproduct', 'modelproduct');
-		$product = $this->modelproduct->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 100);
-		$productMap = Common::arrChangeKey($product['lists'], 'id');
-
-		//添加订单详情
-		$product_ids = explode(",", $data['product_ids']);
-		$nums = explode(",", $data['nums']);
-
-		//获取订单商品详情
-		$this->load->model('api/modelorderdetail', 'modelorderdetail');
-		$orderdetail = $this->modelorderdetail->lists(array('user_id' => $this->_user_id, 'order_id' => $order_id), 1, 1000);
-		$orderdetail = $orderdetail['lists'];
-		$orderdetail = Common::arrChangeKey($orderdetail, 'product_id');
-
-		$total_price = 0;
-		$total_num = 0;
-
 		for($i = 0; isset($product_ids[$i]); $i++)
 		{
 			//判断菜品是否存在
@@ -277,19 +295,86 @@ class Order extends MY_Controller
 			{
 				KsMessage::errorMessage('20016');
 			}
+		}
+	}
 
+	function check_gift($product_ids,$nums,$gift_ids,$productMap,$productgiftMap)
+	{
+		for($i = 0; isset($product_ids[$i]); $i++)
+		{
+			if( empty($gift_ids[$i]) )
+			{
+				continue;
+			}
+
+			$p_gift_ids = $productMap[ $product_ids[$i] ]['gift_ids'];
+			if( empty($p_gift_ids) && $gift_ids[$i] != 0 )
+			{
+				KsMessage::errorMessage('20019');
+			}
+
+			$p_gift_ids = explode(",", $p_gift_ids);
+			if( !in_array($gift_ids[$i], $p_gift_ids) )
+			{
+				KsMessage::errorMessage('20019');
+			}
+
+			if( !isset($productgiftMap[ $gift_ids[$i] ]) )
+			{
+				KsMessage::errorMessage('20020');
+			}
+
+			//检查赠品数量是否充足
+			if( $productgiftMap[ $gift_ids[$i] ]['num'] < $nums[$i] )
+			{
+				KsMessage::errorMessage('20021');
+			}
+		}
+	}
+
+	function append_add($data, $order)
+	{
+		$model = $this->model;
+
+		$order_num = $order['order_num'];
+		$order_id = $order['id'];
+
+		//获得所有的菜品信息
+		$this->load->model('api/modelproduct', 'modelproduct');
+		$product = $this->modelproduct->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 1000);
+		$productMap = Common::arrChangeKey($product['lists'], 'id');
+
+		//获取赠品信息
+		$this->load->model('api/modelproductgift', 'modelproductgift');
+		$productgift = $this->modelproductgift->lists(array('user_id' => $this->_user_id, 'is_online' => 1), 1, 1000);
+		$productgiftMap = Common::arrChangeKey($productgift['lists'], 'id');
+
+		//添加订单详情
+		$product_ids = explode(",", $data['product_ids']);
+		$nums = explode(",", $data['nums']);
+		$gift_ids = explode(",", $data['gift_ids']);
+
+		$this->check_product($product_ids,$nums,$productMap);
+		$this->check_gift($product_ids,$nums,$gift_ids,$productMap,$productgiftMap);
+
+		//获取订单商品详情
+		$this->load->model('api/modelorderdetail', 'modelorderdetail');
+		$orderdetail = $this->modelorderdetail->lists(array('user_id' => $this->_user_id, 'order_id' => $order_id), 1, 1000);
+		$orderdetail = $orderdetail['lists'];
+		$orderdetailP = Common::arrChangeKey($orderdetail, 'product_id');
+		$orderdetailPG = Common::arrChangeKey($orderdetail, 'product_gift_id');
+
+		for($i = 0; isset($product_ids[$i]); $i++)
+		{
 			//判断是否是已添加商品,已添加则更新商品详情
-			if( isset($orderdetail[ $product_ids[$i] ] ) )
+			if( isset($orderdetailP[ $product_ids[$i] ] ) )
 			{
 				$dataArray = array();
-				$dataArray['num']        = $nums[$i] + $orderdetail[ $product_ids[$i] ]['num'];
+				$dataArray['num']        = $nums[$i] + $orderdetailP[ $product_ids[$i] ]['num'];
 				$dataArray['price']      = isset($productMap[ $product_ids[$i] ]) ? $productMap[ $product_ids[$i] ]['price'] * $nums[$i] : 0;
-				$dataArray['price']      =  $dataArray['price'] + $orderdetail[ $product_ids[$i] ]['price'];
+				$dataArray['price']      =  $dataArray['price'] + $orderdetailP[ $product_ids[$i] ]['price'];
 
-				$this->modelorderdetail->update($orderdetail[ $product_ids[$i] ]['id'], $dataArray);
-
-				$total_price += $dataArray['price'];
-				$total_num += $dataArray['num'];
+				$this->modelorderdetail->update($orderdetailP[ $product_ids[$i] ]['id'], $dataArray);
 
 				//扣除菜品的数量
 				$this->modelproduct->deduct($product_ids[$i], 'num', $nums[$i]);
@@ -307,14 +392,50 @@ class Order extends MY_Controller
 
 			$this->modelorderdetail->addRow($dataArray);
 
-			$total_price += $dataArray['price'];
-			$total_num += $dataArray['num'];
-
 			//扣除菜品的数量
 			$this->modelproduct->deduct($product_ids[$i], 'num', $nums[$i]);
 		}
 
+		for($i = 0; isset($gift_ids[$i]); $i++)
+		{
+			if( empty($gift_ids[$i]) )
+			{
+				continue;
+			}
+
+			//判断是否是已添加商品,已添加则更新商品详情
+			if( isset($orderdetailPG[ $gift_ids[$i] ] ) )
+			{
+				$dataArray = array();
+				$dataArray['num']        = $nums[$i] + $orderdetailPG[ $gift_ids[$i] ]['num'];
+				$dataArray['price']      = isset($productgiftMap[ $gift_ids[$i] ]) ? $productgiftMap[ $gift_ids[$i] ]['price'] * $nums[$i] : 0;
+				$dataArray['price']      =  $dataArray['price'] + $orderdetailPG[ $gift_ids[$i] ]['price'];
+
+				$this->modelorderdetail->update($orderdetailPG[ $gift_ids[$i] ]['id'], $dataArray);
+
+				//扣除菜品的数量
+				$this->modelproductgift->deduct($gift_ids[$i], 'num', $nums[$i]);
+
+				continue;
+			}
+
+			$dataArray = array();
+			$dataArray['user_id']         = $this->_user_id;
+			$dataArray['order_id']        = $order_id;
+			$dataArray['product_gift_id'] = $gift_ids[$i];
+			$dataArray['num']             = $nums[$i];
+			$dataArray['price']           = isset($productgiftMap[ $gift_ids[$i] ]) ? $productgiftMap[ $gift_ids[$i] ]['price'] * $nums[$i] : 0;
+			$dataArray['add_time']        = date('Y-m-d H:i:s');
+
+			$this->modelorderdetail->addRow($dataArray);
+
+			//扣除菜品的数量
+			$this->modelproductgift->deduct($gift_ids[$i], 'num', $nums[$i]);
+		}
+
 		$this->modelorderdetail->batch();
+
+		$total_price = $this->modelorderdetail->getTotalPrice($this->_user_id,$order_id);
 
 		$this->$model->update($order_id, array('price' => $total_price, 'update_time' => date('Y-m-d H:i:s')));
 
@@ -323,7 +444,8 @@ class Order extends MY_Controller
 
 		//更新统计表
 		$this->load->model('api/modelorderday', 'modelorderday');
-		$this->modelorderday->addnum($this->_user_id, 0, $total_price);
+		$orderday = $this->$model->getTodayTotalPrice($this->_user_id);
+		$this->modelorderday->addnum($this->_user_id, $orderday['total_num'], $orderday['total_price']);
 
 		KsMessage::showSucc('succ', $order);
 	}
@@ -400,6 +522,8 @@ class Order extends MY_Controller
 			KsMessage::showError($this->$model->_primary.'不能为空哦','',10140);
 		}
 
+		//获得这个订单的创建日期
+		$one = $this->$model->one(array($this->$model->_primary => $data[$this->$model->_primary]));
 		$rs = $this->$model->delete($data[$this->$model->_primary]);
 
 		if(!$rs)
@@ -411,6 +535,11 @@ class Order extends MY_Controller
 		//删除订单详细
 		$this->load->model('api/modelorderdetail', 'modelorderdetail');
 		$this->modelorderdetail->delete_order($this->_user_id, $data[$this->$model->_primary]);
+
+		//重新计算当天的价格
+		$this->load->model('api/modelorderday', 'modelorderday');
+		$orderday = $this->$model->getTodayTotalPrice($this->_user_id, $one['add_time']);
+		$this->modelorderday->addnum($this->_user_id, $orderday['total_num'], $orderday['total_price']);
 
 		$info = array('id' => intval($data[$this->$model->_primary]));
 

@@ -283,17 +283,23 @@
         <li><a href="#id8" id="a_href8">账号查询</a></li>
 		<li><a href="#id45" id="a_href45">前端-店铺查询</a></li>
 
-        <!-- <li><a href="#id9"  id="a_href9">桌号列表</a></li>
+        <li><a href="#id9"  id="a_href9">桌号列表</a></li>
         <li><a href="#id10" id="a_href10">桌号添加</a></li>
         <li><a href="#id11" id="a_href11">桌号修改</a></li>
         <li><a href="#id12" id="a_href12">桌号删除</a></li>
-        <li><a href="#id13" id="a_href13">桌号查询</a></li> -->
+        <li><a href="#id13" id="a_href13">桌号查询</a></li>
 
         <li><a href="#id14" id="a_href14">标签列表</a></li>
         <li><a href="#id15" id="a_href15">标签添加</a></li>
         <li><a href="#id16" id="a_href16">标签修改</a></li>
         <li><a href="#id17" id="a_href17">标签删除</a></li>
         <li><a href="#id18" id="a_href18">标签查询</a></li>
+
+		<li><a href="#id46" id="a_href46">推广标签列表</a></li>
+		<li><a href="#id47" id="a_href47">推广标签添加</a></li>
+		<li><a href="#id48" id="a_href48">推广标签修改</a></li>
+		<li><a href="#id49" id="a_href49">推广标签删除</a></li>
+		<li><a href="#id50" id="a_href50">推广标签查询</a></li>
 
         <li><a href="#id19" id="a_href19">热门搜索列表</a></li>
         <li><a href="#id20" id="a_href20">热门搜索添加</a></li>
@@ -314,6 +320,13 @@
         <li><a href="#id31" id="a_href31">菜品管理修改</a></li>
         <li><a href="#id32" id="a_href32">菜品管理删除</a></li>
         <li><a href="#id33" id="a_href33">菜品管理查询</a></li>
+
+		<li><a href="#id51" id="a_href51">赠品管理列表</a></li>
+		<!-- <li><a href="#id52" id="a_href52">前端-赠品管理列表</a></li> -->
+		<li><a href="#id53" id="a_href53">赠品管理添加</a></li>
+		<li><a href="#id54" id="a_href54">赠品管理修改</a></li>
+		<li><a href="#id55" id="a_href55">赠品管理删除</a></li>
+		<li><a href="#id56" id="a_href56">赠品管理查询</a></li>
 
         <li><a href="#id34" id="a_href34">系统说明添加修改</a></li>
         <li><a href="#id35" id="a_href35">系统说明查询</a></li>
@@ -1282,7 +1295,8 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
         [{
             "id": "3", 编号
             "user_id": "1", 用户ID
-            "title": "1号", 名称
+			"title": "1号", 名称
+			"qrcode": '' 二维码路径
             "add_time": null, 添加时间
             "update_time": null, 更新时间
         }]
@@ -1461,7 +1475,8 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
         {
             "id": "3", 编号
             "user_id": "1", 用户ID
-            "title": "1号", 名称
+			"title": "1号", 名称
+			"qrcode": '' 二维码路径
             "add_time": null, 添加时间
             "update_time": null, 更新时间
         }
@@ -1726,7 +1741,8 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
         [{
             "id": "3", 编号
             "user_id": "1", 用户ID
-            "title": "1号", 名称
+			"title": "1号", 名称
+			"img_url": "",  图片
             "add_time": null, 添加时间
             "update_time": null, 更新时间
         }]
@@ -1795,6 +1811,13 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
 			<td>string</td>
 			<td>是</td>
 			<td>名称</td>
+		</tr>
+
+		<tr>
+			<td>img_url</td>
+			<td>string</td>
+			<td>是</td>
+			<td>图片</td>
 		</tr>
 
 	</tbody>
@@ -1888,6 +1911,13 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
 			<td>名称</td>
 		</tr>
 
+		<tr>
+			<td>img_url</td>
+			<td>string</td>
+			<td>是</td>
+			<td>图片</td>
+		</tr>
+
 	</tbody>
 </table>
 
@@ -1905,7 +1935,8 @@ http://www.ec2order.com/api/user/edit?api_key=23166839&account=admin&password=12
         {
             "id": "3", 编号
             "user_id": "1", 用户ID
-            "title": "1号", 名称
+			"title": "1号", 名称
+			"img_url": "", 图片
             "add_time": null, 添加时间
             "update_time": null, 更新时间
         }
@@ -3057,6 +3088,7 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
             "title": "测试2",  名称
             "category_id": "3", 分类ID
             "label_id": "12",  标签ID
+            "extend_label_id" : 12 推广标签ID
             "num": "0",   数量
             "is_online": "1", 是否上架，1已上架，0下架
             "price": "0.00",  价格
@@ -3145,7 +3177,14 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
             <td>int</td>
             <td>是</td>
             <td>标签ID</td>
-        </tr>
+		</tr>
+		
+       <tr>
+       	<td>extend_label_id</td>
+       	<td>int</td>
+       	<td>否</td>
+       	<td>推广标签ID</td>
+       </tr>
 
         <tr>
             <td>num</td>
@@ -3174,7 +3213,14 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
             <td>是</td>
             <td>是否上架，1已上架，0下架</td>
         </tr>
-
+		
+        <tr>
+            <td>gift_ids</td>
+            <td>int</td>
+            <td>否</td>
+            <td>赠品的ID，以英文逗号分隔</td>
+		</tr>
+		
 
 	</tbody>
 </table>
@@ -3281,6 +3327,13 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
             <td>标签ID</td>
         </tr>
 
+		<tr>
+			<td>extend_label_id</td>
+			<td>int</td>
+			<td>否</td>
+			<td>推广标签ID</td>
+		</tr>
+
         <tr>
             <td>num</td>
             <td>int</td>
@@ -3307,8 +3360,14 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
             <td>int</td>
             <td>是</td>
             <td>是否上架，1已上架，0下架</td>
-        </tr>
-
+		</tr>
+		
+		<tr>
+			<td>gift_ids</td>
+			<td>int</td>
+			<td>否</td>
+			<td>赠品的ID，以英文逗号分隔</td>
+		</tr>
 
 	</tbody>
 </table>
@@ -3329,7 +3388,8 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
             "user_id": "8", 用户ID
             "title": "测试2", 名称
             "category_id": "3", 分类ID
-            "label_id": "12", 标签ID
+			"label_id": "12", 标签ID
+			"extend_label_id" : 12 推广标签ID
             "num": "0", 数量
             "is_online": "1", 是否上架，1已上架，0下架
             "price": "0.00", 价格
@@ -3511,6 +3571,7 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
             "title": "测试2", 名称
             "category_id": "3", 分类ID
             "label_id": "12", 标签ID
+            "extend_label_id":1 推广标签ID
             "num": "0", 数量
             "is_online": "1", 是否上架，1已上架，0下架
             "price": "0.00", 价格
@@ -3519,6 +3580,20 @@ http://www.ec2order.com/api/category/one?api_key=23166839&&post_change_get=1&use
             "update_time": null,
             "category_title": "牛肉", 分类名称
             "label_title": "招牌" 标签名称
+            "gift_ids": "1,2" //赠品ID
+            "gift_id_lists": [
+            {
+                 "id": "1",
+                 "user_id": "8",
+                 "title": "100",
+                 "price": "0.00",
+                 "num": "0",
+                 "sale_num": "0",
+                 "img_url": "",
+                 "is_online": "1",
+                 "add_time": "2019-01-10 14:15:28",
+                 "update_time": null
+            }]
         }
             
     }
@@ -3788,6 +3863,13 @@ http://www.ec2order.com/api/order/add?api_key=23166839&post_change_get=1&user_to
             <td>数量，多的以英文字符逗号分隔</td>
         </tr>
 
+		<tr>
+            <td>gift_ids</td>
+            <td>string</td>
+            <td>是</td>
+            <td>赠品ID，多的以英文字符逗号分隔</td>
+		</tr>
+		
         <tr>
             <td>user_num</td>
             <td>int</td>
@@ -4285,6 +4367,13 @@ http://www.ec2order.com/api/order/add?api_key=23166839&post_change_get=1&user_to
         </tr>
 
 		<tr>
+			<td>extend_label_id</td>
+			<td>int</td>
+			<td>否</td>
+			<td>推广标签ID</td>
+		</tr>
+
+		<tr>
 			<td>title</td>
 			<td>string</td>
 			<td>否</td>
@@ -4311,7 +4400,8 @@ http://www.ec2order.com/api/order/add?api_key=23166839&post_change_get=1&user_to
             "user_id": "8",  用户ID
             "title": "测试2",  名称
             "category_id": "3", 分类ID
-            "label_id": "12",  标签ID
+			"label_id": "12",  标签ID
+			"extend_label_id" : 12 推广标签ID
             "num": "0",   数量
             "is_online": "1", 是否上架，1已上架，0下架
             "price": "0.00",  价格
@@ -4676,6 +4766,1084 @@ http://www.ec2order.com/api/orderDay/statistics?api_key=23166839&&post_change_ge
     }
 }
 </code></pre>
+
+
+
+
+
+
+
+
+<h4><a name="id46">推广标签列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>推广标签列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>推广标签列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/extendLabel/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>否</td>
+			<td>名称</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+			"title": "1号", 名称
+			"img_url": "",  图片
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }]
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id47">推广标签添加</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>推广标签添加</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>推广标签添加</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/extendLabel/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=1号桌
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+
+		<tr>
+			<td>img_url</td>
+			<td>string</td>
+			<td>是</td>
+			<td>图片</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            1  表自增长数字
+        }
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id48">推广标签修改</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>推广标签修改</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>推广标签修改</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/extendLabel/edit?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&title=234
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>
+
+		<tr>
+			<td>img_url</td>
+			<td>string</td>
+			<td>是</td>
+			<td>图片</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+			"title": "1号", 名称
+			"img_url": "", 图片
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }
+    }
+}
+</code></pre>
+
+
+
+
+
+<h4><a name="id49">推广标签删除</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>推广标签删除</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>推广标签删除</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/extendLabel/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2"
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+<h4><a name="id50">推广标签查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>推广标签查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>推广标签查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/extendLabel/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "3", 编号
+            "user_id": "1", 用户ID
+            "title": "", 名称
+            "add_time": null, 添加时间
+            "update_time": null, 更新时间
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id51">赠品管理列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>赠品管理列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>赠品管理列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/productGift/lists?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>否</td>
+			<td>名称</td>
+		</tr>
+
+        <tr>
+            <td>is_online</td>
+            <td>int</td>
+            <td>否</td>
+            <td>是否上架，1已上架，0下架</td>
+        </tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "2",  编号
+            "user_id": "8",  用户ID
+            "title": "测试2",  名称
+            "num": "0",   数量
+            "is_online": "1", 是否上架，1已上架，0下架
+            "price": "0.00",  价格
+            "img_url": "",  图片
+            "add_time": null,
+            "update_time": null,
+            "category_title": "牛肉", 分类名称
+            "label_title": "招牌"  标签名称
+        }]
+    }
+}
+</code></pre>
+
+
+<h4><a name="id52">前端-赠品管理列表</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>前端-赠品管理列表</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>前端-赠品管理列表</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/productGift/li?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>否</td>
+			<td>商品名称</td>
+		</tr>
+
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        [{
+            "id": "2",  编号
+            "user_id": "8",  用户ID
+            "title": "测试2",  名称
+            "num": "0",   数量
+            "is_online": "1", 是否上架，1已上架，0下架
+            "price": "0.00",  价格
+            "img_url": "",  图片
+            "add_time": null,
+            "update_time": null,
+            "category_title": "牛肉", 分类名称
+			"label_title": "招牌"  标签名称
+			"sale_num": 123 销量
+        }]
+    }
+}
+</code></pre>
+
+
+<h4><a name="id53">赠品管理添加</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>赠品管理添加</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>赠品管理添加</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/productGift/add?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+        </tr>
+
+        <tr>
+            <td>num</td>
+            <td>int</td>
+            <td>是</td>
+            <td>数量</td>
+        </tr>
+
+        <tr>
+            <td>price</td>
+            <td>float</td>
+            <td>是</td>
+            <td>价格</td>
+        </tr>
+
+        <tr>
+            <td>img_url</td>
+            <td>string</td>
+            <td>是</td>
+            <td>图片</td>
+        </tr>
+
+        <tr>
+            <td>is_online</td>
+            <td>int</td>
+            <td>是</td>
+            <td>是否上架，1已上架，0下架</td>
+        </tr>
+
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            1  表自增长数字
+        }
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id54">赠品管理修改</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+			<th>赠品管理修改</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>赠品管理修改</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+http://www.ec2order.com/api/productGift/edit?api_key=23166839&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号</td>
+		</tr>
+
+		<tr>
+			<td>title</td>
+			<td>string</td>
+			<td>是</td>
+			<td>名称</td>
+		</tr>        
+        <tr>
+            <td>num</td>
+            <td>int</td>
+            <td>是</td>
+            <td>数量</td>
+        </tr>
+
+        <tr>
+            <td>price</td>
+            <td>float</td>
+            <td>是</td>
+            <td>价格</td>
+        </tr>
+
+        <tr>
+            <td>img_url</td>
+            <td>string</td>
+            <td>是</td>
+            <td>图片</td>
+        </tr>
+
+        <tr>
+            <td>is_online</td>
+            <td>int</td>
+            <td>是</td>
+            <td>是否上架，1已上架，0下架</td>
+        </tr>
+
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2", 编号
+            "user_id": "8", 用户ID
+            "title": "测试2", 名称
+            "num": "0", 数量
+            "is_online": "1", 是否上架，1已上架，0下架
+            "price": "0.00", 价格
+            "img_url": "", 图片
+            "add_time": null,
+            "update_time": null,
+            "category_title": "牛肉", 分类名称
+            "label_title": "招牌" 标签名称
+        }
+    }
+}
+</code></pre>
+
+
+
+
+
+<h4><a name="id55">赠品管理删除</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+<th>赠品管理删除</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>赠品管理删除</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求post方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/productGift/del?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=1
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2"
+        }
+            
+    }
+}
+</code></pre>
+
+
+
+
+<h4><a name="id56">赠品管理查询</a></h4>
+
+<table>
+	<thead>
+		<tr>
+			<th>接口概述</th>
+<th>赠品管理查询</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>功能描述</td>
+			<td>赠品管理查询</td>
+		</tr>
+		<tr>
+			<td>请求方式</td>
+			<td> http请求get方式</td>
+		</tr>
+		<tr>
+			<td>接口地址</td>
+			<td>
+				http://www.ec2order.com/api/productGift/one?api_key=23166839&&post_change_get=1&user_token=8b03ea885d23b2a06c4fe7af4742d05d&id=2
+			</td>
+		</tr>
+		<tr>
+			<td>接口作者</td>
+			<td>wangchun</td>
+		</tr>
+		<tr>
+			<td>接口版本</td>
+			<td>1.0.0</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<table>
+	<thead>
+		<tr>
+			<th>参数名称</th>
+			<th>类型</th>
+			<th>必选</th>
+			<th>描述</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>user_token</td>
+			<td>string</td>
+			<td>是</td>
+			<td>登录返回的user_token</td>
+		</tr>
+
+		<tr>
+			<td>id</td>
+			<td>int</td>
+			<td>是</td>
+			<td>编号ID</td>
+		</tr>
+
+	</tbody>
+</table>
+
+
+<p>成功返回结果</p>
+
+<pre><code>
+{
+    "result": {
+        "status": {
+        "code": 0,
+        "msg": "succ"
+        },
+        "data": 
+        {
+            "id": "2", 编号
+            "user_id": "8", 用户ID
+            "title": "测试2", 名称
+            "num": "0", 数量
+            "is_online": "1", 是否上架，1已上架，0下架
+            "price": "0.00", 价格
+            "img_url": "", 图片
+            "add_time": null,
+            "update_time": null,
+            "category_title": "牛肉", 分类名称
+            "label_title": "招牌" 标签名称
+        }
+            
+    }
+}
+</code></pre>
+
 
 
 

@@ -11,7 +11,7 @@ class Modelorderdetail extends MY_Model
 
     //数据库表对应的字段类型
     public $_fields = array(
-        'int' => array('id','user_id','order_id','product_id','num'),
+        'int' => array('id','user_id','order_id','product_id','num','product_gift_id'),
         'string' => array('price'),
         'time' => array('add_time'),
         'unformat' => array(),
@@ -21,7 +21,7 @@ class Modelorderdetail extends MY_Model
     public $_exist = array();
     public $_unique = array();
 
-    public $deaf_fields_str = 'id,user_id,order_id,product_id,num,price,add_time';
+    public $deaf_fields_str = 'id,user_id,order_id,product_id,num,price,add_time,product_gift_id';
 
     //不需要处理的字段的数组
     public $_unformat = array();
@@ -42,6 +42,16 @@ class Modelorderdetail extends MY_Model
         $sql = "DELETE FROM {$this->_table_name} WHERE user_id = ? AND order_id = ?";
         
 		$this->_query($sql, array($user_id, $order_id));
+    }
+
+    function getTotalPrice($user_id, $order_id)
+    {
+        $sql = "SELECT sum(price) as total_price FROM {$this->_table_name} WHERE user_id = ? AND order_id = ?";
+        
+        $query = $this->_query($sql, array($user_id, $order_id));
+        $one = $query->row_array();
+        
+        return $one['total_price'];
     }
 
 }

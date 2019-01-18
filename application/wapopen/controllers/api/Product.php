@@ -41,7 +41,7 @@ class Product extends MY_Controller
 
 		if ( isset($data['title']) && !empty($data['title']) ) 
 		{
-			$search['%%title'] = $data['title'];
+			$search['%title%'] = $data['title'];
 		}
 
 		if ( isset($data['category_id']) && is_numeric($data['category_id']) ) 
@@ -52,6 +52,11 @@ class Product extends MY_Controller
 		if ( isset($data['label_id']) && is_numeric($data['label_id']) ) 
 		{
 			$search['label_id'] = $data['label_id'];
+		}
+
+		if ( isset($data['extend_label_id']) && is_numeric($data['extend_label_id']) ) 
+		{
+			$search['extend_label_id'] = $data['extend_label_id'];
 		}
 
 		if ( isset($data['is_online']) && is_numeric($data['is_online']) ) 
@@ -128,6 +133,15 @@ class Product extends MY_Controller
 		
 		$one = $this->$model->one(array($this->$model->_primary=>$data[$this->$model->_primary]), $fields_str);
 
+		//获取赠品信息
+		$this->load->model('api/modelproductgift', 'modelproductgift');
+		if( !empty($one['gift_ids']) )
+		{
+			$gift_ids = explode(",", $one['gift_ids']);
+			$giftlists = $this->modelproductgift->inlist($gift_ids, 'id', '*');
+			$one['gift_id_lists'] = array_values($giftlists);
+		}
+
 		if(!is_array($one)){
 			$error_code = 20000 + abs($one);
 			KsMessage::showError('get one','',$error_code);
@@ -171,7 +185,10 @@ class Product extends MY_Controller
 		}
 
 		unset($data[$this->$model->_primary]);
-		
+
+		//判断销售数量不能超过9999 sale_num
+		$data['num'] = isset($data['num']) ? $data['num'] : 0;
+		$data['num'] = isset($data['num']) && $data['num'] > 9999 ?  9999 : $data['num'];
 		$data['user_id'] = $this->_user_id;
 		$data['add_time'] = date('Y-m-d H:i:s');
 
@@ -230,6 +247,8 @@ class Product extends MY_Controller
 			}
 		}
 
+		$data['num'] = isset($data['num']) ? $data['num'] : 0;
+		$data['num'] = isset($data['num']) && $data['num'] > 9999 ?  9999 : $data['num'];
 		$data['update_time'] = date('Y-m-d H:i:s');
 
 		$id = $data[$this->$model->_primary];

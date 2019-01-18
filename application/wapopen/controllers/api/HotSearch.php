@@ -41,7 +41,7 @@ class HotSearch extends MY_Controller
 
 		if ( isset($data['title']) && !empty($data['title']) ) 
 		{
-			$search['%%title'] = $data['title'];
+			$search['%title%'] = $data['title'];
 		}
 		
 		$lists_all = $this->$model->lists($search, $page, $num, $order_by,$fields_str);

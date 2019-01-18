@@ -87,5 +87,7 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define('DEBUG_ARG_NAME', 'debug');
 define('FIREPHP_DEBUG', '1');
 define('FILE_HOST_PATH', '/data/nfs/file');
-define('IMG_HOST', 'http://git.localhost.com/smdc/upload');
+//define('IMG_HOST', 'http://git.localhost.com/smdc');
+define('IMG_HOST', 'http://www.ec2order.com/');
+define('WEB_HOST', 'http://www.ec2order.com/ui');
 

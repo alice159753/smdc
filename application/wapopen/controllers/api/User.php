@@ -38,17 +38,17 @@ class User extends MY_Controller
 
 		if ( isset($data['shop_name']) && !empty($data['shop_name']) ) 
 		{
-			$search['%%shop_name'] = $data['shop_name'];
+			$search['%shop_name%'] = $data['shop_name'];
 		}
 
 		if ( isset($data['shop_owner_name']) && !empty($data['shop_owner_name']) ) 
 		{
-			$search['%%shop_owner_name'] = $data['shop_owner_name'];
+			$search['%shop_owner_name%'] = $data['shop_owner_name'];
 		}
 
 		if ( isset($data['contact_phone']) && !empty($data['contact_phone']) ) 
 		{
-			$search['%%contact_phone'] = $data['contact_phone'];
+			$search['%contact_phone%'] = $data['contact_phone'];
 		}
 		
 		$lists_all = $this->$model->lists($search, $page, $num, $order_by,$fields_str);

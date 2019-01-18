@@ -1,8 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Table extends MY_Controller 
+class ExtendLabel extends MY_Controller 
 {	
-	private $model = "modeltable";
+	private $model = "modelextendlabel";
 	function __construct() 
 	{
 		parent::__construct();
@@ -58,6 +58,72 @@ class Table extends MY_Controller
        	KsMessage::showSucc('succ', $lists, $others_data);
 	}
 	
+
+	/**
+	 * 列表
+	 */
+	function li()
+	{
+		$data = $this->req_param('GET');
+		$model = $this->model;
+
+		// 翻页处理
+		$page = isset($data['page']) ? max(1, intval($data['page'])) : 1;
+		// 每页显示的条数
+		$num = isset($data['num']) ? min(max(1, intval($data['num'])), 300) : 20;
+		
+        // 排序，默认都是创建时间的倒叙
+		$order_by = isset($data['order_by']) ? $data['order_by'] : "id DESC";
+		
+        $this->load->library("sqltools");
+        $this->sqltools->dealData($data);
+
+        // 需要查询的字段
+        $fields_str = $this->$model->deaf_fields_str;
+		if(isset($data['fields_str']) && !empty($data['fields_str']))
+		{
+        	$fields_str = $data['fields_str'];
+		}
+
+		$search = array();
+		$search['user_id'] = $this->_user_id;
+
+		$lists_all = $this->$model->lists($search, $page, $num, $order_by,$fields_str);
+		   
+		if(! is_array($lists_all))
+		{
+			$error_code = 20000 + abs($lists_all);
+			KsMessage::showError('get lists fail!','', $error_code);
+		}
+		   
+       	$lists = $lists_all['lists'];
+		$others_data = $lists_all['others_data'];
+		   
+		$this->load->model('api/modelproduct', 'modelproduct');
+		$search['is_online'] = 1;
+		$search['!num'] = 0;
+
+		for($i = 0; isset($lists[$i]); $i++)
+		{
+			$search['extend_label_id'] = $lists[$i]['id'];
+
+			$count = $this->modelproduct->getCount($search);
+			if( empty($count) )
+			{
+				unset($lists[$i]);
+			}
+			else 
+			{
+				$lists[$i]['product_count'] = $count;
+			}
+		}
+
+		$lists = array_values($lists);
+
+       	KsMessage::showSucc('succ', $lists, $others_data);
+	}
+
+
 	/**
 	 * 单个查询
 	 */
@@ -115,20 +181,15 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20008');
 				}
 			}
 		}
-		
-		unset($data[$this->$model->_primary]);
 
+		unset($data[$this->$model->_primary]);
+		
 		$data['user_id'] = $this->_user_id;
 		$data['add_time'] = date('Y-m-d H:i:s');
-
-		$this->load->library('Phpqrcode');
-		$file = $this->_shop_name."-".$data['title'].".png";
-		$png = Phpqrcode::makePng(WEB_HOST."/#/goods?api_key=23166839&user_token=".$data['user_token']."&table_title=".$data['title'], $file, 'L', 5, 2);
-		$data['qrcode'] = $png;
 
 		// 防止重复提交
 		$this->checkRepeat($mc_key, 3);
@@ -180,7 +241,7 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20008');
 				}
 			}
 		}
@@ -189,11 +250,6 @@ class Table extends MY_Controller
 
 		$id = $data[$this->$model->_primary];
 		unset($data[$this->$model->_primary]);
-		
-		$this->load->library('Phpqrcode');
-		$file = $this->_shop_name."-".$data['title'].".png";
-		$png = Phpqrcode::makePng(WEB_HOST."/#/goods?api_key=23166839&user_token=".$data['user_token']."&table_title=".$data['title'], $file, 'L', 5, 2);
-		$data['qrcode'] = $png;
 
 		$rs = $this->$model->update($id, $data);
 

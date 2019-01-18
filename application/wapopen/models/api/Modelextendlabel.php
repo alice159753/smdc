@@ -1,18 +1,18 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Modeltable extends MY_Model
+class Modelextendlabel extends MY_Model
 {
     //表名
-    public $_table_name = 'smdc_table';
+    public $_table_name = 'smdc_extend_label';
 
     //表别名
-    public $_table_byname = 'smdc_table';
+    public $_table_byname = 'smdc_extend_label';
 
     //数据库表对应的字段类型
     public $_fields = array(
         'int' => array('id','user_id'),
-        'string' => array('title','qrcode'),
+        'string' => array('title','img_url'),
         'time' => array('add_time','update_time'),
         'unformat' => array(),
         'lists_nosearch' => array()
@@ -21,7 +21,7 @@ class Modeltable extends MY_Model
     public $_exist = array('title');
     public $_unique = array('title');
 
-    public $deaf_fields_str = 'id,user_id,title,add_time,update_time,qrcode';
+    public $deaf_fields_str = 'id,user_id,title,add_time,update_time,img_url';
 
     //不需要处理的字段的数组
     public $_unformat = array();

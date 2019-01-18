@@ -12,7 +12,7 @@ class Modellabel extends MY_Model
     //数据库表对应的字段类型
     public $_fields = array(
         'int' => array('id','user_id'),
-        'string' => array('title'),
+        'string' => array('title','img_url'),
         'time' => array('add_time','update_time'),
         'unformat' => array(),
         'lists_nosearch' => array()
@@ -21,7 +21,7 @@ class Modellabel extends MY_Model
     public $_exist = array('title');
     public $_unique = array('title');
 
-    public $deaf_fields_str = 'id,user_id,title,add_time,update_time';
+    public $deaf_fields_str = 'id,user_id,title,add_time,update_time,img_url';
 
     //不需要处理的字段的数组
     public $_unformat = array();

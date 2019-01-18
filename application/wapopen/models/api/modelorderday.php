@@ -77,12 +77,12 @@ class Modelorderday extends MY_Model
         $dataArray = array();
         $dataArray['day']         = date('Ymd');
         $dataArray['user_id']     = $user_id;
-        $dataArray['order_count'] = $num1;
-        $dataArray['order_price'] = $num2;
+        $dataArray['order_count'] = empty($num1) ? 0 : $num1;
+        $dataArray['order_price'] = empty($num2) ? 0 : $num2;
 
         $db = $this->dbConnect('master');
         $sql = $db->insert_string($this->_table_name, $dataArray);
-        $sql .= " on duplicate key update order_count = order_count + $num1 , order_price = order_price + $num2";
+        $sql .= " on duplicate key update order_count = {$dataArray['order_count']} , order_price = {$dataArray['order_price']}";
 		$this->_query($sql);
     }
     

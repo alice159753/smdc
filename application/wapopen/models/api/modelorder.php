@@ -44,4 +44,22 @@ class Modelorder extends MY_Model
 		return date('YmdHis').common::myRandom(3, 7);
     }
 
+    function getTodayTotalPrice($user_id, $date1 = '')
+    {
+        if( empty($date1) )
+        {
+            $date1 = date('Y-m-d');
+        }
+
+        $date1 = date('Y-m-d', strtotime($date1));
+        $date2 = date('Y-m-d', strtotime('+1 day', strtotime($date1)));
+
+        $sql = "SELECT sum(price) as total_price, count(*) as total_num FROM {$this->_table_name} WHERE user_id = ? AND add_time >= ? AND add_time < ?";
+        
+        $query = $this->_query($sql, array($user_id, $date1, $date2));
+        $one = $query->row_array();
+        
+        return $one;
+    } 
+
 }

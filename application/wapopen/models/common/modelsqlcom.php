@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class ModelSqlCom extends MY_Model
+class Modelsqlcom extends MY_Model
 {
 	//左侧匹配（数据库字段命名时不允许包含的字符）
 	public $_spec_fields_left = "#!&<=>";

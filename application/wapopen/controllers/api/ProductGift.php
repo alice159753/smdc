@@ -1,8 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-class Table extends MY_Controller 
+class ProductGift extends MY_Controller 
 {	
-	private $model = "modeltable";
+	private $model = "modelproductgift";
 	function __construct() 
 	{
 		parent::__construct();
@@ -43,7 +43,17 @@ class Table extends MY_Controller
 		{
 			$search['%title%'] = $data['title'];
 		}
-		
+
+		if ( isset($data['is_online']) && is_numeric($data['is_online']) ) 
+		{
+			$search['is_online'] = $data['is_online'];
+		}
+
+		if ( isset($data['!num']) && is_numeric($data['!num']) ) 
+		{
+			$search['!num'] = $data['!num'];
+		}
+
 		$lists_all = $this->$model->lists($search, $page, $num, $order_by,$fields_str);
 		   
 		if(! is_array($lists_all))
@@ -54,8 +64,20 @@ class Table extends MY_Controller
 		   
        	$lists = $lists_all['lists'];
 		$others_data = $lists_all['others_data'];
-		   
+
        	KsMessage::showSucc('succ', $lists, $others_data);
+	}
+
+	//前端展示菜品
+	function li()
+	{
+		$data = $this->req_param('GET');
+		$model = $this->model;
+
+		$_GET['is_online'] = 1;
+		$_GET['!num'] = 0;
+
+		$this->lists();
 	}
 	
 	/**
@@ -86,6 +108,7 @@ class Table extends MY_Controller
 
 		KsMessage::showSucc('succ',$one);
 	}
+
 	/**
 	 * 新增
 	 */
@@ -115,20 +138,18 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20010');
 				}
 			}
 		}
-		
+
 		unset($data[$this->$model->_primary]);
 
+		//判断销售数量不能超过9999 sale_num
+		$data['num'] = isset($data['num']) ? $data['num'] : 0;
+		$data['num'] = isset($data['num']) && $data['num'] > 9999 ?  9999 : $data['num'];
 		$data['user_id'] = $this->_user_id;
 		$data['add_time'] = date('Y-m-d H:i:s');
-
-		$this->load->library('Phpqrcode');
-		$file = $this->_shop_name."-".$data['title'].".png";
-		$png = Phpqrcode::makePng(WEB_HOST."/#/goods?api_key=23166839&user_token=".$data['user_token']."&table_title=".$data['title'], $file, 'L', 5, 2);
-		$data['qrcode'] = $png;
 
 		// 防止重复提交
 		$this->checkRepeat($mc_key, 3);
@@ -180,20 +201,17 @@ class Table extends MY_Controller
 				$one = $this->$model->one($search);
 				if( !empty($one) )
 				{
-					KsMessage::errorMessage('20007');
+					KsMessage::errorMessage('20010');
 				}
 			}
 		}
-
+		
+		$data['num'] = isset($data['num']) ? $data['num'] : 0;
+		$data['num'] = isset($data['num']) && $data['num'] > 9999 ?  9999 : $data['num'];
 		$data['update_time'] = date('Y-m-d H:i:s');
 
 		$id = $data[$this->$model->_primary];
 		unset($data[$this->$model->_primary]);
-		
-		$this->load->library('Phpqrcode');
-		$file = $this->_shop_name."-".$data['title'].".png";
-		$png = Phpqrcode::makePng(WEB_HOST."/#/goods?api_key=23166839&user_token=".$data['user_token']."&table_title=".$data['title'], $file, 'L', 5, 2);
-		$data['qrcode'] = $png;
 
 		$rs = $this->$model->update($id, $data);
 
