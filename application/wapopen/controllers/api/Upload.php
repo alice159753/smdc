@@ -27,7 +27,7 @@ class Upload extends MY_Controller
         {
             $config['base_dir'] = FCPATH;
             $config['upload_path'] =  FCPATH.'/upload/'.date('Y-m-d').'/';
-            $config['allowed_types'] = array('png', 'jpg', 'jpeg', 'apk');
+            $config['allowed_types'] = array('png', 'jpg', 'jpeg', 'apk','PNG', 'JPG', 'JPEG', 'APK');
             $config['max_size'] = 1024 * 1024* 10;//文件大小
             $config['domain_name'] = IMG_HOST; //域名
         }
@@ -41,7 +41,7 @@ class Upload extends MY_Controller
         {
             KsMessage::errorMessage('10118');
         }
-            
+
         $info = explode('.', $_FILES[$file_name]['name']);
         $info = pathinfo($_FILES[$file_name]['name']);
         $ext  = $info['extension'];
